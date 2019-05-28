@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dm.example.dao.UserBaseDao">
+
+    <sql id="BaseColumns">
+        create_time,email,header_url,id,is_delete,phone,type,update_time,username
+    </sql>
+
+    <select id="selectByPrimaryKey" resultType="UserBaseBean" parameterType="java.lang.Long">
+        select
+        <include refid="BaseColumns"/>
+        from account_user_base
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <select id="list" resultType="UserBaseBean" parameterType="UserBaseBean">
+        select
+        <include refid="BaseColumns"/>
+        from account_user_base
+    </select>
+
+    <insert id="insert" parameterType="UserBaseBean" keyProperty="id">
+        insert into account_user_base
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="headerUrl != null">
+                header_url,
+            </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deleteStatus != null">
+                is_delete,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="headerUrl != null">
+                #{headerUrl},
+            </if>
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="deleteStatus != null">
+                #{deleteStatus},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="username != null">
+                #{username},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="UserBaseBean">
+        update account_user_base
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="headerUrl != null">
+                header_url = #{headerUrl},
+            </if>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="deleteStatus != null">
+                is_delete = #{deleteStatus},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        update account_user_base set is_delete = 2
+        <where>
+            id = #{id}
+        </where>
+    </update>
+</mapper>

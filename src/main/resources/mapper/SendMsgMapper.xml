@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dm.login.dao.SendMsgDao">
+    <resultMap id="BaseMap" type="SendMsgBean">
+        <result property="account" column="account" />
+        <result property="code" column="code" />
+        <result property="createTime" column="create_time" />
+        <result property="expiresTime" column="expires_time" />
+        <result property="id" column="id" />
+        <result property="deleteStatus" column="is_delete" />
+        <result property="successStatus" column="is_success" />
+        <result property="msg" column="msg" />
+        <result property="type" column="type" />
+        <result property="userId" column="user_id" />
+    </resultMap>
+
+    <sql id="BaseColumns">
+        account,code,create_time,expires_time,id,is_delete,is_success,msg,type,user_id
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseMap" parameterType="java.lang.Integer">
+        select
+        <include refid="BaseColumns"/>
+        from account_send_msg
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <select id="list" resultMap="BaseMap" parameterType="SendMsgBean">
+        select
+        <include refid="BaseColumns"/>
+        from account_send_msg
+    </select>
+
+    <insert id="insert" parameterType="SendMsgBean" keyProperty="id">
+        insert into account_send_msg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="account != null">
+                account,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="expiresTime != null">
+                expires_time,
+            </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deleteStatus != null">
+                is_delete,
+            </if>
+            <if test="successStatus != null">
+                is_success,
+            </if>
+            <if test="msg != null">
+                msg,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="account != null">
+                #{account},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="expiresTime != null">
+                #{expiresTime},
+            </if>
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="deleteStatus != null">
+                #{deleteStatus},
+            </if>
+            <if test="successStatus != null">
+                #{successStatus},
+            </if>
+            <if test="msg != null">
+                #{msg},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="SendMsgBean">
+        update account_send_msg
+        <set>
+            <if test="account != null">
+                account = #{account},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="expiresTime != null">
+                expires_time = #{expiresTime},
+            </if>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="deleteStatus != null">
+                is_delete = #{deleteStatus},
+            </if>
+            <if test="successStatus != null">
+                is_success = #{successStatus},
+            </if>
+            <if test="msg != null">
+                msg = #{msg},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        update account_send_msg set is_delete = 2
+        <where>
+            id = #{id}
+        </where>
+    </update>
+</mapper>
