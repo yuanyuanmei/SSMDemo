@@ -1,10 +1,18 @@
 package com.dm.example.util;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.util.DigestUtils;
 
 import java.util.Random;
 
 public class StringUtils {
+
+
+    public static final String MD5 = "MD5";
+
+    //加密次数
+    public static final Integer encryNum = 1024;
 
     /**
      * 生成随机数当作getItemID
@@ -33,9 +41,8 @@ public class StringUtils {
     }
 
     public static String md5(String code,String salt){
-        code = code + salt;
-        String md5 = DigestUtils.md5DigestAsHex(code.getBytes());
-        return md5;
+        //加密方式、密码、盐值、加密次数
+        return String.valueOf(new SimpleHash(MD5, code, ByteSource.Util.bytes(salt), encryNum));
     }
 
 }

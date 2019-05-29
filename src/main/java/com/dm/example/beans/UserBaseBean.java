@@ -37,9 +37,8 @@ public class UserBaseBean extends BaseEntity{
         */
         private String username;
 
-        public UserBaseBean(String username,Integer type){
+        public UserBaseBean(String username){
                 super();
                 this.username = username;
-                this.type = type;
         }
 }

@@ -1,14 +1,12 @@
 package com.dm.example.exception;
 
-import com.dm.example.constants.ApiViewName;
+import com.dm.example.constants.ViewNameConsts;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 
 /**
  * 全局异常处理
@@ -41,7 +39,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
             errorMsg = e.getMessage();
         }
         modelAndView.addObject("errorMsg",errorMsg);
-        modelAndView.setViewName(ApiViewName.ERROR_500);
+        modelAndView.setViewName(ViewNameConsts.ERROR_500);
         //日志记录
         log.error("{}",errorMsg);
         return modelAndView;

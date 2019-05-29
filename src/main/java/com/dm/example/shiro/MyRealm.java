@@ -2,13 +2,11 @@ package com.dm.example.shiro;
 
 import com.dm.example.beans.UserAccountBean;
 import com.dm.example.dao.UserAccountDao;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
@@ -41,8 +39,12 @@ public class MyRealm extends AuthorizingRealm {
         String account = (String) token.getPrincipal();
         //根据帐号查找
         UserAccountBean bean = userAccountDao.findByAccount(account);
+        if(Objects.isNull(bean)){
+            throw new UnknownAccountException();
+        }
         if(Objects.nonNull(bean)){
-            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(bean.getAccount(),bean.getPassword(),getName());
+            ByteSource credentialsSalt = ByteSource.Util.bytes(bean.getSalt());
+            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(bean.getAccount(),bean.getPassword(),credentialsSalt,getName());
             return authenticationInfo;
         }
         return null;

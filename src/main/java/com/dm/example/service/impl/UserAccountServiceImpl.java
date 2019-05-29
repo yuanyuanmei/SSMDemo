@@ -5,14 +5,12 @@ import com.dm.example.beans.UserBaseBean;
 import com.dm.example.dao.UserAccountDao;
 import com.dm.example.dao.UserBaseDao;
 import com.dm.example.dto.ResultDto;
-import com.dm.example.enums.EnumLoginType;
-import com.dm.example.exception.CustomException;
+import com.dm.example.enums.EnumAccountType;
 import com.dm.example.service.UserAccountService;
 import com.dm.example.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.DigestUtils;
 
 import java.util.Objects;
 
@@ -36,7 +34,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         if(Objects.isNull(paramBean.getId())){
             //生成7位数随机用户名
             String username = StringUtils.getItemID(7);
-            UserBaseBean baseBean = new UserBaseBean(username, EnumLoginType.ACCOUNT_TYPE.getKey());
+            UserBaseBean baseBean = new UserBaseBean(username);
             //新增用户基础表
             baseDao.insert(baseBean);
             //获取usr_id
@@ -52,7 +50,7 @@ public class UserAccountServiceImpl implements UserAccountService {
             result = accountDao.update(paramBean);
         }
         if(result > 0){
-            ResultDto.success("更新成功",paramBean);
+            return ResultDto.success("更新成功",paramBean);
         }
         return ResultDto.fail("更新失败");
     }

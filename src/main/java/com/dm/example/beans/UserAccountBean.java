@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -24,6 +25,11 @@ public class UserAccountBean extends BaseEntity{
         */
         @NotBlank(message = "账号不能为空")
         private String account;
+        /**
+         * 帐号类型 1.普通账号 2.手机帐号 3,邮箱帐号
+         */
+        @NotNull(message = "帐号类型不能为空")
+        private Integer type;
         /**
         * 明文密码
         */
@@ -59,9 +65,10 @@ public class UserAccountBean extends BaseEntity{
         /**
          * 方便构造对象
          */
-        public UserAccountBean(String account,String password){
+        public UserAccountBean(String account,String password,Integer type){
                 this.account = account;
                 this.password = password;
+                this.type = type;
         }
 
 }

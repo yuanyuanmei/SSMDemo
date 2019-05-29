@@ -6,15 +6,15 @@ import java.util.List;
 /**
  * 登录类型枚举
  */
-public enum EnumLoginType {
+public enum EnumAccountType {
 
-    ACCOUNT_TYPE(1,"普通账号"), PHONE_TYPE(2,"手机号"), MAIL_TYPE(3,"邮箱");
+    COMMON(1,"普通账号"), PHONE(2,"手机号"), MAIL(3,"邮箱");
 
     //枚举的变量类型为final 防止被修改
     private final Integer key;
     private final String value;
 
-    private EnumLoginType(Integer key,String value){
+    private EnumAccountType(Integer key, String value){
         this.key = key;
         this.value = value;
     }
@@ -28,6 +28,6 @@ public enum EnumLoginType {
     }
 
     //枚举的变量必须为static静态
-    public static List<EnumLoginType> list = Arrays.asList(values());
+    public static List<EnumAccountType> list = Arrays.asList(values());
 
 }

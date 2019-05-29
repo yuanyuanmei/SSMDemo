@@ -1,11 +1,13 @@
 package com.dm.example.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 结果工具类
  */
 @Data
+@ToString
 public class ResultDto {
 
     private Integer code;
@@ -14,13 +16,14 @@ public class ResultDto {
 
     private Object o;
 
-    public ResultDto(Integer code, String message, Object o){
+
+    private ResultDto(Integer code, String message, Object o){
         this.code = code;
         this.message =message;
         this.o = o;
     }
 
-    public ResultDto(Integer code, String message){
+    private ResultDto(Integer code, String message){
         this.code = code;
         this.message =message;
     }

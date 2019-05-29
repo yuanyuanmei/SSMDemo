@@ -20,6 +20,7 @@
                                     <span class="input-group-addon"><i class="icon-lock"></i>
                                     </span>
                                 <input type="password" class="form-control" placeholder="Password" name="password">
+                                <input type="hidden" value="1" name="type"/>
                             </div>
                             <div>${errorMsg}</div>
                             <div class="row">

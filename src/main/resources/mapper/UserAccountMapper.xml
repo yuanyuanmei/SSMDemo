@@ -11,6 +11,7 @@
     <sql id="BaseColumns">
         id
         ,account
+        ,type
         ,create_time
         ,is_delete as deleteStatus
         ,last_login_ip
@@ -87,6 +88,9 @@
             <if test="userId != null">
                 user_id,
             </if>
+            <if test="type != null">
+                type,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -122,6 +126,9 @@
             </if>
             <if test="userId != null">
                 #{userId},
+            </if>
+            <if test="type != null">
+                type,
             </if>
         </trim>
     </insert>

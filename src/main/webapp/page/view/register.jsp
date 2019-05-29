@@ -32,7 +32,7 @@
                                 </span>
                             <input type="password" class="form-control" placeholder="Repeat password">
                         </div>
-
+                        <input type="hidden" value="1" name="type"/>
                         <button type="submit" class="btn btn-block btn-success">Create Account</button>
                         <div>${errorMsg}</div>
                     </div>
