@@ -10,6 +10,7 @@
     <link href="../static/css/font-awesome.min.css" rel="stylesheet">
     <link href="../static/css/simple-line-icons.css" rel="stylesheet">
     <link href="../static/css/style.css" rel="stylesheet">
+    <link rel="icon" href="../static/favicon.ico" type="image/x-icon" />
 
 </head>
 <body class="app flex-row align-items-center">
