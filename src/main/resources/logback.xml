@@ -1,36 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+根节点configuration scan 日志修改将会重新加载，默认为true
+scanPeriod 加载间隔60秒 默认单位为毫秒
+debug 当此属性为true时，将打印出logback内部日志信息，实时查看Logback运行状态，默认为false
+-->
 <configuration  scan="true" scanPeriod="60 seconds" debug="false">
-    <contextName>logback</contextName>
-    <property name="log.path" value="D:/Tomcat/logs" />
-    <!--输出到控制台-->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-             <level>ERROR</level>
-         </filter>-->
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+    <!--property 公共属性，可供配置文件全局使用-->
+    <property name="CONTEXT_NAME" value="logback"/>
+    <property name="LOG_PATH" value="/logs" />
+    <property name="PROJECT_NAME" value="SSMDemo" />
+    <!--contextName 上下文名称，也是日志文件配置名称，自定义-->
+    <contextName>${CONTEXT_NAME}</contextName>
+    <!--timestamp获取时间戳字符串，key 标识符，dataPattern时间转换为字符串格式-->
+    <timestamp key = "bySecond" dataPattern="yyyy-MM-dd HH:mm:ss"/>
+    <!--appender负责写日志的组件,name名称，class全限定名-->
+
+    <!--ConsoleAppender把日志输出在控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--encoder对日志格式化-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger[50] - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!--输出到文件-->
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--FileAppender 把日志输出到文件-->
+    <!--rollingFileAppender滚动日志，按照每天生成日志文件-->
+    <appender name = "TIME_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/logback.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_PATH}/${PROJECT_NAME}Log.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志保留天数-->
+            <MaxHistory>30</MaxHistory>
         </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        <!--encoder日志内容格式化-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度，%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger[50] - %msg%n</pattern>
         </encoder>
+        <!--日志文件最大大小-->
+        <tiggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </tiggeringPolicy>
     </appender>
 
-    <root level="info,error,debug,warn">
-        <appender-ref ref="console" />
-        <appender-ref ref="file" />
+    <!--日志输出级别DEBUG输出的地方-->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="TIME_FILE" />
     </root>
 
-    <!-- logback为java中的包 -->
-    <logger name="com.dm.login.controller"/>
-    <!--logback.LogbackDemo：类的全路径 -->
-    <!--    <logger name="com.dm.login." level="WARN" additivity="false">-->
-    <!--        <appender-ref ref="console"/>-->
-    <!--    </logger>-->
+
+    <!--myibatis log configure-->
+    <logger name="com.apache.ibatis" level="TRACE"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+
 </configuration>
