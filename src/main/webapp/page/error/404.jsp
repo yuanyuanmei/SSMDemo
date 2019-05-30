@@ -12,9 +12,9 @@
 
     <style type="text/css">
 
-        .head404{ width:580px; height:234px; margin:50px auto 0 auto; background:url(../static/images/head404.png) no-repeat; }
+        .head404{ width:580px; height:234px; margin:50px auto 0 auto; background:url(../static/images/error/head404.png) no-repeat; }
 
-        .txtbg404{ width:499px; height:169px; margin:10px auto 0 auto; background:url(../static/images/txtbg404.png) no-repeat;}
+        .txtbg404{ width:499px; height:169px; margin:10px auto 0 auto; background:url(../static/images/error/txtbg404.png) no-repeat;}
 
         .txtbg404 .txtbox{ width:390px; position:relative; top:30px; left:60px;color:#eee; font-size:13px;}
 

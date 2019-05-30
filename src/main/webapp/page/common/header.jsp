@@ -13,4 +13,3 @@
     <link rel="icon" href="../static/favicon.ico" type="image/x-icon" />
 
 </head>
-<body class="app flex-row align-items-center">

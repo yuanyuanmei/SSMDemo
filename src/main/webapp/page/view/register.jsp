@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 
+<body class="app flex-row align-items-center">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">

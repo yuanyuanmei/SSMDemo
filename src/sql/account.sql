@@ -11,13 +11,9 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 29/05/2019 22:46:59
+ Date: 30/05/2019 20:33:38
+ Auth:王功明
 */
-
-/**
-    2019/05/29 表第一次提交
-    作者：王功明
- */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -62,38 +58,6 @@ CREATE TABLE `account_log_operate`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户操作日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for account_permission
--- ----------------------------
-DROP TABLE IF EXISTS `account_permission`;
-CREATE TABLE `account_permission`  (
-  `id` int(32) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for account_role
--- ----------------------------
-DROP TABLE IF EXISTS `account_role`;
-CREATE TABLE `account_role`  (
-  `id` int(32) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for account_role_permission
--- ----------------------------
-DROP TABLE IF EXISTS `account_role_permission`;
-CREATE TABLE `account_role_permission`  (
-  `permission_id` int(32) NOT NULL,
-  `role_id` int(32) NOT NULL,
-  PRIMARY KEY (`permission_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for account_send_msg
 -- ----------------------------
 DROP TABLE IF EXISTS `account_send_msg`;
@@ -111,6 +75,58 @@ CREATE TABLE `account_send_msg`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `item_index`(`account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '发送信息记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for account_sys_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `account_sys_permission`;
+CREATE TABLE `account_sys_permission`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `parent_id` int(11) UNSIGNED NOT NULL COMMENT '上级id',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '菜单名称',
+  `type` tinyint(1) UNSIGNED NOT NULL COMMENT '类型',
+  `permission` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '权限',
+  `sort` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序序号',
+  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `is_delete` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '删除状态',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for account_sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `account_sys_role`;
+CREATE TABLE `account_sys_role`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
+  `desc` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '描述',
+  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `is_delete` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '删除状态',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for account_sys_role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `account_sys_role_permission`;
+CREATE TABLE `account_sys_role_permission`  (
+  `role_id` int(11) UNSIGNED NOT NULL COMMENT '角色ID',
+  `permission_id` int(11) NOT NULL COMMENT '权限ID',
+  PRIMARY KEY (`role_id`, `permission_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for account_sys_role_user
+-- ----------------------------
+DROP TABLE IF EXISTS `account_sys_role_user`;
+CREATE TABLE `account_sys_role_user`  (
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `role_id` int(11) NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for account_user_account
@@ -152,16 +168,6 @@ CREATE TABLE `account_user_base`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `username_index`(`username`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基础表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for account_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `account_user_role`;
-CREATE TABLE `account_user_role`  (
-  `uid` int(32) NOT NULL,
-  `role_id` int(32) NOT NULL,
-  PRIMARY KEY (`uid`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for account_user_security

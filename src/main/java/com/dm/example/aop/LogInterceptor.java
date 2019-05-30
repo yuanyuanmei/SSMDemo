@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
  * 异常信息日志处理
  */
 @Slf4j
+@Aspect
 @Component
 public class LogInterceptor {
 
@@ -22,13 +23,8 @@ public class LogInterceptor {
         String methodName = joinPoint.getSignature().getName();
 
         long startTime = System.currentTimeMillis();
-
-        log.info("{}",className+"类的"+methodName+"方法开始执行......");
-
         try{
             result =  joinPoint.proceed();
-
-            log.info("{}",className+"类的"+methodName+"方法正常结束......");
 
         }catch (Throwable e){
             StackTraceElement stackTraceElement= e.getStackTrace()[e.getStackTrace().length-1];
