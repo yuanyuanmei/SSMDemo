@@ -46,7 +46,7 @@ public class UserAccountBean extends BaseEntity{
         /**
         * 关联用户ID
         */
-        private Integer userId;
+        private Long userId;
 
         /**
          * 最后一次登录IP

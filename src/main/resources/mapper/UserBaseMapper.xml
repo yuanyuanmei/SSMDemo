@@ -3,11 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dm.example.dao.UserBaseDao">
 
+    <resultMap id="BaseMap" type="UserBaseBean">
+        <!--column是数据库查询中的参数值，不一定是外键-->
+        <collection property="roleBeans" ofType="SysRoleBean" column="id" fetchType="lazy"
+                    select="com.dm.example.dao.SysRoleDao.getRolesByUserId"/>
+    </resultMap>
     <sql id="BaseColumns">
         create_time,email,header_url,id,is_delete,phone,type,update_time,username
     </sql>
 
-    <select id="selectByPrimaryKey" resultType="UserBaseBean" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" resultMap="BaseMap" parameterType="java.lang.Long">
         select
         <include refid="BaseColumns"/>
         from account_user_base
@@ -16,7 +21,7 @@
         </where>
     </select>
 
-    <select id="list" resultType="UserBaseBean" parameterType="UserBaseBean">
+    <select id="list" resultMap="BaseMap" parameterType="UserBaseBean">
         select
         <include refid="BaseColumns"/>
         from account_user_base

@@ -11,7 +11,7 @@ public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date createTime;

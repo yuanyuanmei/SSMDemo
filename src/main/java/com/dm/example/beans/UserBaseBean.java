@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 
 /**
 * UserBaseBean 实体类
@@ -16,6 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class UserBaseBean extends BaseEntity{
+        private Long id;
         /**
         * 邮箱
         */
@@ -36,6 +39,11 @@ public class UserBaseBean extends BaseEntity{
         * 用户名
         */
         private String username;
+
+        /**
+         * 角色列表
+         */
+        private List<SysRoleBean> roleBeans;
 
         public UserBaseBean(String username){
                 super();

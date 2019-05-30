@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dm.example.dao.SysPermissionDao">
+
+    <sql id="BaseColumns">
+        account_sys_permission.id,
+        account_sys_permission.parent_id,
+        account_sys_permission.name,
+        account_sys_permission.level,
+        account_sys_permission.permission,
+        account_sys_permission.sort,
+        account_sys_permission.create_time,
+        account_sys_permission.update_time,
+        account_sys_permission.is_delete
+    </sql>
+
+
+    <select id="getPermissionsByRoleId" resultType="SysPermissionBean" parameterType="java.lang.Integer">
+        select
+        <include refid="BaseColumns"/>
+        from account_sys_permission
+        left join account_sys_role_permission on account_sys_permission.id = account_sys_role_permission.permission_id
+        <where>
+            account_sys_role_permission.role_id = #{roleId}
+            and account_sys_permission.is_delete = 1
+        </where>
+        order by account_sys_permission.sort
+    </select>
+
+    <select id="selectByPrimaryKey" resultType="SysPermissionBean" parameterType="java.lang.Integer">
+        select
+        <include refid="BaseColumns"/>
+        from account_sys_permission
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <select id="list" resultType="SysPermissionBean" parameterType="SysPermissionBean">
+        select
+        <include refid="BaseColumns"/>
+        from account_sys_permission
+    </select>
+
+    <insert id="insert" parameterType="SysPermissionBean" keyProperty="id">
+        insert into account_sys_permission
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="permission != null">
+                permission,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleteStatus != null">
+                is_delete,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="parentId != null">
+                #{parentId},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="level != null">
+                #{level},
+            </if>
+            <if test="permission != null">
+                #{permission},
+            </if>
+            <if test="sort != null">
+                #{sort},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="deleteStatus != null">
+                #{deleteStatus},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="SysPermissionBean">
+        update account_sys_permission
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="permission != null">
+                permission = #{permission},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleteStatus != null">
+                is_delete = #{deleteStatus},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        update account_sys_permission set is_delete = 2
+        <where>
+            id = #{id}
+        </where>
+    </update>
+</mapper>
