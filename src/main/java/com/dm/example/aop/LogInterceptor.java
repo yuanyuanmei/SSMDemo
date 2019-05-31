@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +15,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogInterceptor {
 
+    //声明切点 excution表达式（返回值 包名.子包.方法（参数））
+    @Pointcut(value = "execution(* com.dm.example.service.impl..*(..))")
+    public void pointcut(){
+
+    }
+
     //环绕通知 必须返回Object,不然后面的方法不会执行！！！！！
+    @Around(value = "pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
 
         //获取类名和方法名
@@ -43,20 +51,5 @@ public class LogInterceptor {
         return result;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 }
