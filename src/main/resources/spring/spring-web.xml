@@ -39,14 +39,22 @@
     <!--全局异常配置-->
     <bean class="com.dm.example.exception.CustomExceptionResolver" />
 
-    <!--启动cglib代理-->
-    <aop:aspectj-autoproxy proxy-target-class="true" />
-    <aop:config>
-        <aop:aspect id="logInterceptor" ref="logInterceptor">
-            <aop:pointcut id="pointCut" expression="execution(* com.dm.example.service..*.*(..))"/>
-            <aop:around method="around" pointcut-ref="pointCut"/>
-        </aop:aspect>
-    </aop:config>
+    <!--
+    JDK动态代理是面向接口的代理模式，如果被代理目标没有接口那么Spring也无能为力，
+    Spring通过Java的反射机制生产被代理接口的新的匿名实现类，重写了其中AOP的增强方法。
+
+    CGLib是一个强大、高性能的Code生产类库，可以实现运行期动态扩展java类，Spring在运行期间通过
+    CGlib继承要被动态代理的类，重写父类的方法，实现AOP面向切面编程呢。
+
+    区别：
+    JDK动态代理是面向接口的。
+    CGLib动态代理是通过字节码底层继承要代理类来实现（如果被代理类被final关键字所修饰，那么抱歉会失败）。
+    -->
+
+    <!--声明 aspect注解 proxy-target-class="true" 开启则表示启用cglib代理.-->
+    <aop:aspectj-autoproxy />
+
+    <!--扫描aop包-->
     <context:component-scan base-package="com.dm.example.aop"/>
 
 </beans>
