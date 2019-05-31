@@ -90,6 +90,58 @@ fd1/*
 !/fw/bin/
 !/fw/sf/
 ----------------------------------------------------------------------------------
+
+
+=======sql========
+/*
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.6.24-log : Database - questionnaire
+*********************************************************************
+*/
+
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`questionnaire` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `questionnaire`;
+
+/*Table structure for table `public_perms` */
+
+DROP TABLE IF EXISTS `public_perms`;
+
+CREATE TABLE `public_perms` (
+  `id` int(1) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `type` int(1) NOT NULL COMMENT '类型 1菜单 2功能',
+  `parentid` int(1) NOT NULL COMMENT '父级编号',
+  `url` varchar(255) NOT NULL COMMENT '菜单地址',
+  `icon` varchar(50) NOT NULL COMMENT '菜单图标标识',
+  `permission` varchar(255) NOT NULL COMMENT '授权标识，多个以,分隔',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '权限状态 1正常 2禁用',
+  `remark` varchar(500) NOT NULL COMMENT '备注',
+  `ranking` int(1) NOT NULL DEFAULT '0' COMMENT '排序',
+  `createtime` datetime NOT NULL COMMENT '添加时间',
+  `is_delete` int(1) NOT NULL DEFAULT '1' COMMENT '是否删除 1未删除 2已删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='后台菜单权限表';
+
+/*Data for the table `public_perms` */
+
+insert  into `public_perms`(`id`,`name`,`type`,`parentid`,`url`,`icon`,`permission`,`status`,`remark`,`ranking`,`createtime`,`is_delete`) values (1,'系统管理',1,0,'sys/setting','admin','',1,'系统设置',0,'2019-05-23 16:11:49',1),(2,'用户管理',1,1,'sys/user','admin','',1,'用户设置',0,'2019-05-23 16:11:49',1),(3,'用户添加',2,2,'','admin','sys:user:save',1,'用户添加',0,'2019-05-23 16:11:49',1),(4,'用户修改',2,2,'','admin','sys:user:update',1,'用户修改',0,'2019-05-23 16:11:49',1),(5,'用户删除',2,2,'','admin','sys:user:delete',1,'用户删除',0,'2019-05-23 16:11:49',1),(6,'用户列表',2,2,'','admin','sys:user:list',1,'用户列表',0,'2019-05-23 16:11:49',1),(7,'用户授权',2,2,'','admin','sys:user:grant',1,'用户授权',0,'2019-05-23 16:11:49',1),(8,'角色管理',1,1,'sys/role','admin','',1,'角色设置',0,'2019-05-23 16:11:49',1),(9,'角色添加',2,8,'','admin','sys:role:save',1,'角色添加',0,'2019-05-23 16:11:49',1),(10,'角色修改',2,8,'','admin','sys:role:update',1,'角色修改',0,'2019-05-23 16:11:49',1),(11,'角色删除',2,8,'','admin','sys:role:delete',1,'角色删除',0,'2019-05-23 16:11:49',1),(12,'角色列表',2,8,'','admin','sys:role:list',1,'角色列表',0,'2019-05-23 16:11:49',1),(13,'权限管理',1,1,'sys/menu','admin','',1,'权限设置',0,'2019-05-23 16:11:49',1),(14,'权限添加',2,13,'','admin','sys:menu:save',1,'权限添加',0,'2019-05-23 16:11:49',1),(15,'权限修改',2,13,'','admin','sys:menu:update',1,'权限修改',0,'2019-05-23 16:11:49',1),(16,'权限删除',2,13,'','admin','sys:menu:delete',1,'权限删除',0,'2019-05-23 16:11:49',1),(17,'权限列表',2,13,'','admin','sys:menu:list',1,'权限列表',0,'2019-05-23 16:11:49',1);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+==================
 今日思考：
 1.AOP 切面编程的作用不就是抽离公共部分处理吗，那项目中的哪些地方重复操作比较严重呢？
 2.所有Controller的校验方法可否抽离出来，结合自定义注解实现AOP切面呢？？
