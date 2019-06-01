@@ -19,6 +19,10 @@ import java.util.List;
 @ToString
 public class SysRoleBean extends BaseEntity{
         /**
+         * 主键id
+         */
+        private Integer id;
+        /**
         * 角色名称
         */
         private String name;

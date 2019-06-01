@@ -15,7 +15,7 @@
                             <div class="input-group mb-1">
                                     <span class="input-group-addon"><i class="icon-user"></i>
                                     </span>
-                                <input type="text" class="form-control" placeholder="Username" name="username">
+                                <input type="text" class="form-control" placeholder="Username" name="account">
                             </div>
                             <div class="input-group mb-2">
                                     <span class="input-group-addon"><i class="icon-lock"></i>

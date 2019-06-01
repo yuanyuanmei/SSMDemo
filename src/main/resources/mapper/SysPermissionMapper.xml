@@ -4,28 +4,29 @@
 <mapper namespace="com.dm.example.dao.SysPermissionDao">
 
     <sql id="BaseColumns">
-        account_sys_permission.id,
-        account_sys_permission.parent_id,
-        account_sys_permission.name,
-        account_sys_permission.level,
-        account_sys_permission.permission,
-        account_sys_permission.sort,
-        account_sys_permission.create_time,
-        account_sys_permission.update_time,
-        account_sys_permission.is_delete
+        id,name,type,parent_id,url,icon,permission,status,memo,sort,create_time,is_delete
     </sql>
 
-
+    <!--根据角色ID查询权限-->
     <select id="getPermissionsByRoleId" resultType="SysPermissionBean" parameterType="java.lang.Integer">
         select
-        <include refid="BaseColumns"/>
+        account_sys_permission.*
         from account_sys_permission
         left join account_sys_role_permission on account_sys_permission.id = account_sys_role_permission.permission_id
         <where>
             account_sys_role_permission.role_id = #{roleId}
             and account_sys_permission.is_delete = 1
         </where>
-        order by account_sys_permission.sort
+    </select>
+
+    <!--根据用户ID查询权限-->
+    <select id="getPermissionsByUserId" resultType="SysPermissionBean" parameterType="java.lang.Long">
+        select a.*
+        from account_sys_permission a
+        left join account_sys_role_permission b on a.id = b.permission_id
+        left join account_sys_role c on c.id = b.role_id
+        left join account_sys_role_user d on d.role_id = c.id
+        where d.user_id = #{userId} and type =1
     </select>
 
     <select id="selectByPrimaryKey" resultType="SysPermissionBean" parameterType="java.lang.Integer">
@@ -49,26 +50,35 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="parentId != null">
-                parent_id,
-            </if>
             <if test="name != null">
                 name,
             </if>
-            <if test="level != null">
-                level,
+            <if test="type != null">
+                type,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="icon != null">
+                icon,
             </if>
             <if test="permission != null">
                 permission,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="memo != null">
+                memo,
             </if>
             <if test="sort != null">
                 sort,
             </if>
             <if test="createTime != null">
                 create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
             </if>
             <if test="deleteStatus != null">
                 is_delete,
@@ -79,26 +89,35 @@
             <if test="id != null">
                 #{id},
             </if>
-            <if test="parentId != null">
-                #{parentId},
-            </if>
             <if test="name != null">
                 #{name},
             </if>
-            <if test="level != null">
-                #{level},
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="parentId != null">
+                #{parentId},
+            </if>
+            <if test="url != null">
+                #{url},
+            </if>
+            <if test="icon != null">
+                #{icon},
             </if>
             <if test="permission != null">
                 #{permission},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="memo != null">
+                #{memo},
             </if>
             <if test="sort != null">
                 #{sort},
             </if>
             <if test="createTime != null">
                 #{createTime},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime},
             </if>
             <if test="deleteStatus != null">
                 #{deleteStatus},
@@ -112,26 +131,35 @@
             <if test="id != null">
                 id = #{id},
             </if>
-            <if test="parentId != null">
-                parent_id = #{parentId},
-            </if>
             <if test="name != null">
                 name = #{name},
             </if>
-            <if test="level != null">
-                level = #{level},
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
             </if>
             <if test="permission != null">
                 permission = #{permission},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="memo != null">
+                memo = #{memo},
             </if>
             <if test="sort != null">
                 sort = #{sort},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
             </if>
             <if test="deleteStatus != null">
                 is_delete = #{deleteStatus},

@@ -12,9 +12,14 @@ import java.util.List;
 public interface SysPermissionDao extends BaseDao<SysPermissionBean> {
 
     /**
-     * 根据权限ID查询角色集合
+     * 根据角色ID查询权限集合
      * @param roleId
      * @return
      */
     List<SysPermissionBean> getPermissionsByRoleId(@Param("roleId") Integer roleId);
+
+    /**
+     * 根据用户ID查询权限集合
+     */
+    List<SysPermissionBean> getPermissionsByUserId(@Param("userId") Long userId);
 }

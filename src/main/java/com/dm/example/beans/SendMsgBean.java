@@ -19,6 +19,10 @@ import java.util.Date;
 @ToString
 public class SendMsgBean extends BaseEntity{
         /**
+         * 主键id
+         */
+        private Long id;
+        /**
         * 发送对象(手机号码或邮箱)
         */
         private String account;

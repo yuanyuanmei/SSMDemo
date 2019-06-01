@@ -21,6 +21,10 @@ import java.util.Date;
 @ToString
 public class UserAccountBean extends BaseEntity{
         /**
+         * 主键id
+         */
+        private Long id;
+        /**
         * 账号
         */
         @NotBlank(message = "账号不能为空")

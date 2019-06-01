@@ -1,39 +1,56 @@
 package com.dm.example.beans;
 
-import com.dm.example.base.BaseEntity;
+import com.dm.example.base.BaseTree;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 
 /**
 * AccountSysPermission 实体类
-* Created by auto generator on Thu May 30 20:50:32 CST 2019.
+* Created by auto generator on Fri May 31 19:34:58 CST 2019.
 */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class SysPermissionBean extends BaseEntity{
+public class SysPermissionBean extends BaseTree<SysPermissionBean> {
+
         /**
-        * 上级id
-        */
-        private Integer parentId;
-        /**
-        * 菜单名称
+        * 名称
         */
         private String name;
         /**
-        * 菜单级别
+        * 类型 1菜单 2功能
         */
-        private Integer level;
+        private Integer type;
+
         /**
-        * 权限
+        * 菜单地址
+        */
+        private String url;
+        /**
+        * 菜单图标标识
+        */
+        private String icon;
+        /**
+        * 授权标识，多个以,分隔
         */
         private String permission;
         /**
-        * 排序序号
+        * 权限状态 1正常 2禁用
+        */
+        private Integer status;
+        /**
+        * 备注
+        */
+        private String memo;
+        /**
+        * 排序
         */
         private Integer sort;
+
 }

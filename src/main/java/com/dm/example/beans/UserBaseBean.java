@@ -18,6 +18,9 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class UserBaseBean extends BaseEntity{
+        /**
+         * 主键id
+         */
         private Long id;
         /**
         * 邮箱

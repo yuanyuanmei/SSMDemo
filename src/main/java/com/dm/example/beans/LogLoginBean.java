@@ -19,6 +19,10 @@ import java.util.Date;
 @ToString
 public class LogLoginBean extends BaseEntity {
         /**
+         * 主键id
+         */
+        private Long id;
+        /**
         * 账号
         */
         private String account;

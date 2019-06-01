@@ -15,4 +15,5 @@ public interface SysRoleDao extends BaseDao<SysRoleBean> {
      */
     List<SysRoleDao> getRolesByUserId(@Param("userId") Long userId);
 
+
 }
