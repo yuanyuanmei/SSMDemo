@@ -1,5 +1,7 @@
 package com.dm.example.annotations;
 
+import com.dm.example.beans.UserAccountBean;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,5 +28,5 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE,ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidateCustom {
-    String value() default "";
+    Class value() default Object.class;
 }

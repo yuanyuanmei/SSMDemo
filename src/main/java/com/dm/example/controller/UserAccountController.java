@@ -41,7 +41,7 @@ public class UserAccountController {
 
     //登录
     @PostMapping(ApiFuncConsts.LOGIN)
-    @ValidateCustom(value = "UserAccountBean")
+    @ValidateCustom(value = UserAccountBean.class)
     public String login(UserAccountBean paramBean, HttpSession session,Model model) throws CustomException {
         //1.帐号密码登录
         Subject subject = SecurityUtils.getSubject();
@@ -65,6 +65,7 @@ public class UserAccountController {
     }
 
     @PostMapping(ApiFuncConsts.REIGISTER)
+    @ValidateCustom(value = UserAccountBean.class)
     public String register(UserAccountBean paramBean,Model model) {
         //1.参数校验
         String validateMsg = ValidationUtils.validate(paramBean);
