@@ -3,7 +3,10 @@ package com.dm.example.controller;
 import com.dm.example.constants.ApiFuncConsts;
 import com.dm.example.constants.ApiModuleConsts;
 import com.dm.example.constants.ViewNameConsts;
+import com.dm.example.dto.PageDto;
+import com.dm.example.service.UserBaseService;
 import org.apache.shiro.session.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(ApiModuleConsts.SYS)
 public class SysController {
 
+    @Autowired
+    private UserBaseService baseService;
+
     //用户列表
     @GetMapping(ApiFuncConsts.USER)
-    public String getUserList(Model model){
+    public String getUserList(PageDto pageDto,Model model){
         model.addAttribute("title","用户列表");
         model.addAttribute("sysType","user");
+        model.addAttribute("pageList",baseService.pageList(pageDto));
         return ViewNameConsts.ADMIN_VIEW;
     }
     //角色列表

@@ -12,53 +12,23 @@
                 <table class="table table-bordered table-striped table-condensed">
                     <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Date registered</th>
-                        <th>Role</th>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>昵称</th>
                         <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${pageList.list}" var="item">
                     <tr>
-                        <td>Vishnu Serghei</td>
-                        <td>2012/01/01</td>
-                        <td>Member</td>
+                        <td>${item.id}</td>
+                        <td>${item.username}</td>
+                        <td>${item.nickname}</td>
                         <td>
                             <span class="badge badge-success">Active</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Zbyněk Phoibos</td>
-                        <td>2012/02/01</td>
-                        <td>Staff</td>
-                        <td>
-                            <span class="badge badge-danger">Banned</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Einar Randall</td>
-                        <td>2012/02/01</td>
-                        <td>Admin</td>
-                        <td>
-                            <span class="badge badge-default">Inactive</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Félix Troels</td>
-                        <td>2012/03/01</td>
-                        <td>Member</td>
-                        <td>
-                            <span class="badge badge-warning">Pending</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Aulus Agmundr</td>
-                        <td>2012/01/21</td>
-                        <td>Staff</td>
-                        <td>
-                            <span class="badge badge-success">Active</span>
-                        </td>
-                    </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <nav>

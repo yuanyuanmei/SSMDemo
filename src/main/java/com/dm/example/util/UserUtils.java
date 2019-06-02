@@ -1,11 +1,13 @@
 package com.dm.example.util;
 
 import com.dm.example.beans.SysPermissionBean;
+import com.dm.example.beans.SysRoleBean;
 import com.dm.example.beans.UserBaseBean;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserUtils {
@@ -30,10 +32,10 @@ public class UserUtils {
 
     /**
      * 设置菜单session
-     * @param list
+     * @param roleBeans
      */
-    public static void setNavSession(List<SysPermissionBean> list){
-        getSession().setAttribute("nav",TreeUtils.convertToTree(list,0));
+    public static void setNavSession(List<SysRoleBean> roleBeans){
+        getSession().setAttribute("nav",TreeUtils.convertToTree(getPermissionBeans(roleBeans),0));
     }
     /**
      * 通过session获得当前用户
@@ -42,6 +44,18 @@ public class UserUtils {
     public static UserBaseBean getCurrentUser(){
         UserBaseBean bean = (UserBaseBean) getSession().getAttribute("user");
         return bean;
+    }
+
+    /**
+     * 通过角色获取权限集合
+     */
+    public static List<SysPermissionBean> getPermissionBeans(List<SysRoleBean> roleBeans) {
+        List<SysPermissionBean> permissionBeans = new ArrayList<>();
+        for(int i =0;roleBeans!=null && i<roleBeans.size();i++){
+            SysRoleBean roleBean = roleBeans.get(i);
+                permissionBeans.addAll(roleBean.getPermissionBeans());
+            }
+            return permissionBeans;
     }
 
 

@@ -54,21 +54,10 @@ public class UserBaseBean extends BaseEntity{
          */
         private List<SysRoleBean> roleBeans;
 
-        /**
-         * 权限列表
-         */
-        private List<SysPermissionBean> permissionBeans = new ArrayList<>();
-
         public UserBaseBean(String username){
             super();
             this.username = username;
         }
 
-        public List<SysPermissionBean> getPermissionBeans() {
-            for(int i =0;roleBeans!=null && i<roleBeans.size();i++){
-                SysRoleBean roleBean = roleBeans.get(i);
-                    permissionBeans.addAll(roleBean.getPermissionBeans());
-                }
-                return permissionBeans;
-        }
+
 }

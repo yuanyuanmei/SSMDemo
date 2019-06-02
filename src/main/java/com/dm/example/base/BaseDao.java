@@ -38,9 +38,8 @@ public interface BaseDao<T> {
 
     /**
      * 查询集合
-     * @param t
      * @return
      */
-    List<T> list(T t);
+    List<T> list();
 
 }

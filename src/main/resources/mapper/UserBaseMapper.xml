@@ -5,7 +5,7 @@
 
     <resultMap id="BaseMap" type="UserBaseBean">
         <!--column是数据库查询中的参数值，不一定是外键-->
-        <collection property="roleBeans" ofType="SysRoleBean" column="id"
+        <collection property="roleBeans" ofType="SysRoleBean" column="id" fetchType="lazy"
                     select="com.dm.example.dao.SysRoleDao.getRolesByUserId"/>
     </resultMap>
     <sql id="BaseColumns">
@@ -25,6 +25,7 @@
         select
         <include refid="BaseColumns"/>
         from account_user_base
+        order by id asc
     </select>
 
     <insert id="insert" parameterType="UserBaseBean" keyProperty="id">

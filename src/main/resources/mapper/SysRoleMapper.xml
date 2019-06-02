@@ -5,7 +5,7 @@
 
     <resultMap id="BaseMap" type="SysRoleBean">
         <!--column是数据库查询中的参数值，不一定是外键-->
-        <collection property="permissionBeans" ofType="SysPermissionBean" column="id"
+        <collection property="permissionBeans" ofType="SysPermissionBean" column="id" fetchType="lazy"
                     select="com.dm.example.dao.SysPermissionDao.getPermissionsByRoleId"/>
     </resultMap>
     <sql id="BaseColumns">

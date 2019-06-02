@@ -4,7 +4,7 @@
 <mapper namespace="com.dm.example.dao.UserAccountDao">
 
     <resultMap id="BaseMap" type="UserAccountBean">
-        <association property="userBaseBean" column="user_id" javaType="UserBaseBean"
+        <association property="userBaseBean" column="user_id" javaType="UserBaseBean" fetchType="lazy"
                      select="com.dm.example.dao.UserBaseDao.selectByPrimaryKey"/>
     </resultMap>
 

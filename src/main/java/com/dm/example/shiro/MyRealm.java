@@ -41,7 +41,7 @@ public class MyRealm extends AuthorizingRealm {
         Set<String> roleNames = roles.stream().map(SysRoleBean::getName).collect(Collectors.toSet());
         authorizationInfo.setRoles(roleNames);
         //获取权限名称集合
-        List<SysPermissionBean> permissionList = bean.getUserBaseBean().getPermissionBeans();
+        List<SysPermissionBean> permissionList = UserUtils.getPermissionBeans(roles);
         Set<String> permissions = permissionList.stream().filter(p -> !Objects.isNull(p.getPermission()))
                 .map(SysPermissionBean::getPermission).collect(Collectors.toSet());
         authorizationInfo.setStringPermissions(permissions);
@@ -66,7 +66,7 @@ public class MyRealm extends AuthorizingRealm {
             ByteSource credentialsSalt = ByteSource.Util.bytes(bean.getSalt());
             AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(bean.getAccount(),bean.getPassword(),credentialsSalt,getName());
             UserUtils.setUserSession(bean.getUserBaseBean());
-            UserUtils.setNavSession(bean.getUserBaseBean().getPermissionBeans());
+            UserUtils.setNavSession(bean.getUserBaseBean().getRoleBeans());
             return authenticationInfo;
         }
         return null;
