@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,12 +45,30 @@ public class UserBaseBean extends BaseEntity{
         private String username;
 
         /**
+         * 昵称
+         */
+        private String nickname;
+
+        /**
          * 角色列表
          */
         private List<SysRoleBean> roleBeans;
 
+        /**
+         * 权限列表
+         */
+        private List<SysPermissionBean> permissionBeans = new ArrayList<>();
+
         public UserBaseBean(String username){
-                super();
-                this.username = username;
+            super();
+            this.username = username;
+        }
+
+        public List<SysPermissionBean> getPermissionBeans() {
+            for(int i =0;roleBeans!=null && i<roleBeans.size();i++){
+                SysRoleBean roleBean = roleBeans.get(i);
+                    permissionBeans.addAll(roleBean.getPermissionBeans());
+                }
+                return permissionBeans;
         }
 }

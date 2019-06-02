@@ -9,10 +9,4 @@ import java.util.List;
  */
 public interface SysPermissionService {
 
-    /**
-     * 根据用户ID查询菜单
-     * @param userId
-     * @return
-     */
-    List<SysPermissionBean> getNavByUserId(Long userId);
 }

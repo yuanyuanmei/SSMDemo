@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="card-group mb-0">
                 <div class="card p-2">
-                    <form action="/admin/login" method="post">
+                    <form action="/user/login" method="post">
                         <div class="card-block">
                             <h1>登录</h1>
                             <p class="text-muted">登录你的账号</p>
@@ -40,7 +40,7 @@
                         <div>
                             <h2>注册</h2>
                             <p>注册...........</p>
-                            <button type="button" class="btn btn-primary active mt-1" onclick='location.href="/admin/register"'>Register Now!</button>
+                            <button type="button" class="btn btn-primary active mt-1" onclick='location.href="/user/register"'>Register Now!</button>
                         </div>
                     </div>
                 </div>

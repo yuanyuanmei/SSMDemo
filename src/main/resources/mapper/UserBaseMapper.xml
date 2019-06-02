@@ -5,11 +5,11 @@
 
     <resultMap id="BaseMap" type="UserBaseBean">
         <!--column是数据库查询中的参数值，不一定是外键-->
-        <collection property="roleBeans" ofType="SysRoleBean" column="id" fetchType="lazy"
+        <collection property="roleBeans" ofType="SysRoleBean" column="id"
                     select="com.dm.example.dao.SysRoleDao.getRolesByUserId"/>
     </resultMap>
     <sql id="BaseColumns">
-        create_time,email,header_url,id,is_delete,phone,type,update_time,username
+        create_time,email,header_url,id,is_delete,phone,type,update_time,username,nickname
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseMap" parameterType="java.lang.Long">
@@ -57,6 +57,9 @@
             <if test="username != null">
                 username,
             </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -86,6 +89,9 @@
             </if>
             <if test="username != null">
                 #{username},
+            </if>
+            <if test="nickname != null">
+                #{nickname},
             </if>
         </trim>
     </insert>
@@ -119,6 +125,9 @@
             </if>
             <if test="username != null">
                 username = #{username},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname},
             </if>
         </set>
         where id = #{id}

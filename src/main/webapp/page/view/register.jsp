@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card mx-2">
-                <form action="/admin/register" method="post">
+                <form action="/user/register" method="post">
                     <div class="card-block p-2">
                         <h1>Register</h1>
                         <p class="text-muted">Create your account</p>
@@ -41,7 +41,7 @@
                 <div class="card-footer p-2">
                     <div class="row">
                         <div class="col-6">
-                            <button class="btn btn-block btn-facebook" type="button" onclick="location.href='/admin/login'">
+                            <button class="btn btn-block btn-facebook" type="button" onclick="location.href='/user/login'">
                                 <span>login</span>
                             </button>
                         </div>

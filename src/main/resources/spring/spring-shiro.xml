@@ -23,16 +23,16 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 身份认证失败，则跳转到登录页面的配置 -->
-        <property name="loginUrl" value="/login.jsp"/>
+        <property name="loginUrl" value="/user/login"/>
         <!-- 权限认证失败，则跳转到指定页面 -->
-        <property name="unauthorizedUrl" value="/unauthor.jsp"/>
+        <property name="unauthorizedUrl" value="/error/600"/>
         <!-- Shiro连接约束配置,即过滤链的定义 -->
         <property name="filterChainDefinitions">
             <value>
-                /login=anon
-                /admin*=authc
-                /student=roles[teacher]
-                /teacher=perms["user:create"]
+                /user/login=anon
+                /user/register=anon
+                /error/*=anon
+                /admin/*=authc
             </value>
         </property>
     </bean>

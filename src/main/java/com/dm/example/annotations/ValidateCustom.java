@@ -28,5 +28,8 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE,ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidateCustom {
+    //校验对象
     Class value() default Object.class;
+    //跳转路径
+    String viewName() default "/";
 }

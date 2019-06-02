@@ -45,6 +45,7 @@ public class ValidateInterceptor {
             for(int i = 0;i<joinPoint.getArgs().length;i++){
                 if(custom.value().equals(joinPoint.getArgs()[i].getClass())){
                     obj = joinPoint.getArgs()[i];
+                    break;
                 }
             }
             // 参数校验
@@ -53,7 +54,7 @@ public class ValidateInterceptor {
                 // 获取request对象，传递参数
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 request.setAttribute("errorMsg",validateMsg);
-                return ViewNameConsts.LONGIN_VIEW;
+                return custom.viewName();
             }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

@@ -7,8 +7,8 @@
         <div class="col-md-6">
             <div class="clearfix">
                 <h1 class="float-left display-3 mr-2">500</h1>
-                <h4 class="pt-1">${errorMsg}</h4>
-                <p class="text-muted">页面有一点点小问题，请联系管理员，亲</p>
+                <h4 class="pt-1">无权访问奥</h4>
+                <p class="text-muted">检查是否有权限访问，铁汁.</p>
             </div>
             <div class="input-prepend input-group">
                     <span class="input-group-addon"><i class="fa fa-search"></i>
