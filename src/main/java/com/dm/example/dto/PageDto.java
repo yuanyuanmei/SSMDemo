@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PageDto {
 
-    private Integer pageNo = 1;
+    private Integer pageNum = 1;
 
     private Integer pageSize = 10;
 

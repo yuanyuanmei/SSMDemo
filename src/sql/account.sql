@@ -11,8 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 30/05/2019 20:33:38
- Auth:王功明
+ Date: 03/06/2019 20:21:16
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +36,7 @@ CREATE TABLE `account_log_login`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `usr_id_index`(`user_id`) USING BTREE,
   INDEX `account_index`(`account`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for account_log_operate
@@ -55,7 +54,7 @@ CREATE TABLE `account_log_operate`  (
   `note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `usr_id_index`(`usr_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户操作日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户操作日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for account_send_msg
@@ -74,39 +73,69 @@ CREATE TABLE `account_send_msg`  (
   `is_delete` tinyint(1) NOT NULL DEFAULT 1 COMMENT '删除状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `item_index`(`account`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '发送信息记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '发送信息记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for account_sys_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `account_sys_permission`;
 CREATE TABLE `account_sys_permission`  (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `parent_id` int(11) UNSIGNED NOT NULL COMMENT '上级id',
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '菜单名称',
-  `type` tinyint(1) UNSIGNED NOT NULL COMMENT '类型',
-  `permission` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '权限',
-  `sort` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序序号',
-  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-  `is_delete` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '删除状态',
+  `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
+  `type` int(1) NOT NULL COMMENT '类型 1菜单 2功能',
+  `parent_id` int(1) NOT NULL COMMENT '父级编号',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单地址',
+  `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '菜单图标标识',
+  `permission` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '授权标识，多个以,分隔',
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '权限状态 1正常 2禁用',
+  `memo` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `sort` int(1) NOT NULL DEFAULT 0 COMMENT '排序',
+  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `is_delete` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '是否删除 1未删除 2已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '后台菜单权限表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of account_sys_permission
+-- ----------------------------
+INSERT INTO `account_sys_permission` VALUES (1, '系统管理', 1, 0, 'sys/setting', 'admin', '', 1, '系统设置', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (2, '用户管理', 1, 1, 'sys/user', 'admin', '', 1, '用户设置', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (3, '用户添加', 2, 2, '', 'admin', 'sys:user:save', 1, '用户添加', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (4, '用户修改', 2, 2, '', 'admin', 'sys:user:update', 1, '用户修改', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (5, '用户删除', 2, 2, '', 'admin', 'sys:user:delete', 1, '用户删除', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (6, '用户列表', 2, 2, '', 'admin', 'sys:user:list', 1, '用户列表', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (7, '用户授权', 2, 2, '', 'admin', 'sys:user:grant', 1, '用户授权', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (8, '角色管理', 1, 1, 'sys/role', 'admin', '', 1, '角色设置', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (9, '角色添加', 2, 8, '', 'admin', 'sys:role:save', 1, '角色添加', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (10, '角色修改', 2, 8, '', 'admin', 'sys:role:update', 1, '角色修改', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (11, '角色删除', 2, 8, '', 'admin', 'sys:role:delete', 1, '角色删除', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (12, '角色列表', 2, 8, '', 'admin', 'sys:role:list', 1, '角色列表', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (13, '权限管理', 1, 1, 'sys/menu', 'admin', '', 1, '权限设置', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (14, '权限添加', 2, 13, '', 'admin', 'sys:menu:save', 1, '权限添加', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (15, '权限修改', 2, 13, '', 'admin', 'sys:menu:update', 1, '权限修改', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (16, '权限删除', 2, 13, '', 'admin', 'sys:menu:delete', 1, '权限删除', 0, '2019-05-23 16:11:49', 1);
+INSERT INTO `account_sys_permission` VALUES (17, '权限列表', 2, 13, '', 'admin', 'sys:menu:list', 1, '权限列表', 0, '2019-05-23 16:11:49', 1);
 
 -- ----------------------------
 -- Table structure for account_sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `account_sys_role`;
 CREATE TABLE `account_sys_role`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
-  `desc` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '描述',
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色名称',
+  `desc` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '描述',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
   `is_delete` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '删除状态',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of account_sys_role
+-- ----------------------------
+INSERT INTO `account_sys_role` VALUES (1, 'ADMIN', '管理员', '2017-05-01 13:25:39', '2017-10-05 21:59:18', 1);
+INSERT INTO `account_sys_role` VALUES (2, 'USER', '', '2017-08-01 21:47:31', '2017-10-05 21:59:26', 1);
 
 -- ----------------------------
 -- Table structure for account_sys_role_permission
@@ -119,6 +148,77 @@ CREATE TABLE `account_sys_role_permission`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of account_sys_role_permission
+-- ----------------------------
+INSERT INTO `account_sys_role_permission` VALUES (1, 1);
+INSERT INTO `account_sys_role_permission` VALUES (1, 2);
+INSERT INTO `account_sys_role_permission` VALUES (1, 3);
+INSERT INTO `account_sys_role_permission` VALUES (1, 4);
+INSERT INTO `account_sys_role_permission` VALUES (1, 6);
+INSERT INTO `account_sys_role_permission` VALUES (1, 7);
+INSERT INTO `account_sys_role_permission` VALUES (1, 8);
+INSERT INTO `account_sys_role_permission` VALUES (1, 9);
+INSERT INTO `account_sys_role_permission` VALUES (1, 10);
+INSERT INTO `account_sys_role_permission` VALUES (1, 11);
+INSERT INTO `account_sys_role_permission` VALUES (1, 12);
+INSERT INTO `account_sys_role_permission` VALUES (1, 13);
+INSERT INTO `account_sys_role_permission` VALUES (1, 14);
+INSERT INTO `account_sys_role_permission` VALUES (1, 15);
+INSERT INTO `account_sys_role_permission` VALUES (1, 16);
+INSERT INTO `account_sys_role_permission` VALUES (1, 17);
+INSERT INTO `account_sys_role_permission` VALUES (1, 18);
+INSERT INTO `account_sys_role_permission` VALUES (1, 19);
+INSERT INTO `account_sys_role_permission` VALUES (1, 20);
+INSERT INTO `account_sys_role_permission` VALUES (1, 21);
+INSERT INTO `account_sys_role_permission` VALUES (1, 22);
+INSERT INTO `account_sys_role_permission` VALUES (1, 23);
+INSERT INTO `account_sys_role_permission` VALUES (1, 24);
+INSERT INTO `account_sys_role_permission` VALUES (1, 25);
+INSERT INTO `account_sys_role_permission` VALUES (1, 26);
+INSERT INTO `account_sys_role_permission` VALUES (1, 27);
+INSERT INTO `account_sys_role_permission` VALUES (1, 28);
+INSERT INTO `account_sys_role_permission` VALUES (1, 29);
+INSERT INTO `account_sys_role_permission` VALUES (1, 30);
+INSERT INTO `account_sys_role_permission` VALUES (1, 31);
+INSERT INTO `account_sys_role_permission` VALUES (1, 32);
+INSERT INTO `account_sys_role_permission` VALUES (1, 33);
+INSERT INTO `account_sys_role_permission` VALUES (1, 34);
+INSERT INTO `account_sys_role_permission` VALUES (1, 35);
+INSERT INTO `account_sys_role_permission` VALUES (1, 36);
+INSERT INTO `account_sys_role_permission` VALUES (1, 37);
+INSERT INTO `account_sys_role_permission` VALUES (1, 38);
+INSERT INTO `account_sys_role_permission` VALUES (1, 39);
+INSERT INTO `account_sys_role_permission` VALUES (1, 40);
+INSERT INTO `account_sys_role_permission` VALUES (2, 1);
+INSERT INTO `account_sys_role_permission` VALUES (2, 2);
+INSERT INTO `account_sys_role_permission` VALUES (2, 3);
+INSERT INTO `account_sys_role_permission` VALUES (2, 4);
+INSERT INTO `account_sys_role_permission` VALUES (2, 6);
+INSERT INTO `account_sys_role_permission` VALUES (2, 7);
+INSERT INTO `account_sys_role_permission` VALUES (2, 8);
+INSERT INTO `account_sys_role_permission` VALUES (2, 9);
+INSERT INTO `account_sys_role_permission` VALUES (2, 10);
+INSERT INTO `account_sys_role_permission` VALUES (2, 11);
+INSERT INTO `account_sys_role_permission` VALUES (2, 12);
+INSERT INTO `account_sys_role_permission` VALUES (2, 13);
+INSERT INTO `account_sys_role_permission` VALUES (2, 14);
+INSERT INTO `account_sys_role_permission` VALUES (2, 15);
+INSERT INTO `account_sys_role_permission` VALUES (2, 16);
+INSERT INTO `account_sys_role_permission` VALUES (2, 17);
+INSERT INTO `account_sys_role_permission` VALUES (2, 18);
+INSERT INTO `account_sys_role_permission` VALUES (2, 19);
+INSERT INTO `account_sys_role_permission` VALUES (2, 20);
+INSERT INTO `account_sys_role_permission` VALUES (2, 21);
+INSERT INTO `account_sys_role_permission` VALUES (2, 22);
+INSERT INTO `account_sys_role_permission` VALUES (2, 23);
+INSERT INTO `account_sys_role_permission` VALUES (2, 24);
+INSERT INTO `account_sys_role_permission` VALUES (2, 25);
+INSERT INTO `account_sys_role_permission` VALUES (2, 30);
+INSERT INTO `account_sys_role_permission` VALUES (2, 31);
+INSERT INTO `account_sys_role_permission` VALUES (2, 34);
+INSERT INTO `account_sys_role_permission` VALUES (2, 36);
+
+-- ----------------------------
 -- Table structure for account_sys_role_user
 -- ----------------------------
 DROP TABLE IF EXISTS `account_sys_role_user`;
@@ -127,6 +227,12 @@ CREATE TABLE `account_sys_role_user`  (
   `role_id` int(11) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of account_sys_role_user
+-- ----------------------------
+INSERT INTO `account_sys_role_user` VALUES (1, 1);
+INSERT INTO `account_sys_role_user` VALUES (2, 2);
 
 -- ----------------------------
 -- Table structure for account_user_account
@@ -148,7 +254,14 @@ CREATE TABLE `account_user_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `usr_id_index`(`user_id`) USING BTREE,
   INDEX `account_password_index`(`account`, `password`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户账号表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户账号表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of account_user_account
+-- ----------------------------
+INSERT INTO `account_user_account` VALUES (40, 40, '12342221225', 1, '5923c74b98d7421d7a056ee6583194a7', 'sk55', '12', '', '2019-05-29 23:37:35', '2019-05-29 23:37:35', '2019-05-29 23:37:35', 1);
+INSERT INTO `account_user_account` VALUES (41, 1, 'admin', 1, '626ab0aba5993b5f4f85d2b2069d9acf', 'Si1V', '123456', '', '2019-05-29 23:45:05', '2019-05-29 23:45:05', '2019-05-29 23:45:05', 1);
+INSERT INTO `account_user_account` VALUES (42, 42, '18573519914', 1, '53164bd7cb224620f6101068ba32d821', '91Y6', '123456', '', '2019-05-30 19:42:20', '2019-05-30 19:42:20', '2019-05-30 19:42:20', 1);
 
 -- ----------------------------
 -- Table structure for account_user_base
@@ -167,7 +280,14 @@ CREATE TABLE `account_user_base`  (
   `is_delete` tinyint(1) NOT NULL DEFAULT 1 COMMENT '删除状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `username_index`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基础表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基础表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of account_user_base
+-- ----------------------------
+INSERT INTO `account_user_base` VALUES (1, 'rY1eOeX', '超级管理员', '', '', 1, '', '2019-05-29 23:37:35', '2019-05-29 23:37:35', 1);
+INSERT INTO `account_user_base` VALUES (41, '64G8D66', '', '', '', 1, '', '2019-05-29 23:45:05', '2019-05-29 23:45:05', 1);
+INSERT INTO `account_user_base` VALUES (42, 'CVW5UT3', '', '', '', 1, '', '2019-05-30 19:42:20', '2019-05-30 19:42:20', 1);
 
 -- ----------------------------
 -- Table structure for account_user_security
@@ -186,6 +306,6 @@ CREATE TABLE `account_user_security`  (
   `update_time` datetime(0) NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `usr_id_index`(`usr_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户安全表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户安全表' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

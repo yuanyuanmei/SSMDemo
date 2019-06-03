@@ -9,43 +9,22 @@
                 <i class="fa fa-align-justify"></i> Combined All Table
             </div>
             <div class="card-block">
-                <table class="table table-bordered table-striped table-condensed">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>用户名</th>
-                        <th>昵称</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${pageList.list}" var="item">
-                    <tr>
-                        <td>${item.id}</td>
-                        <td>${item.username}</td>
-                        <td>${item.nickname}</td>
-                        <td>
-                            <span class="badge badge-success">Active</span>
-                        </td>
-                    </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <c:if test="${sysType == 'user'}"><%@include file="table-user.jsp"%></c:if>
+                <c:if test="${sysType == 'role'}"><%@include file="table-role.jsp"%></c:if>
+                <c:if test="${sysType == 'menu'}"><%@include file="table-menu.jsp"%></c:if>
                 <nav>
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Prev</a>
+                        <c:if test="${pageList.hasPreviousPage}">
+                            <li class="page-item"><a class="page-link" href="/sys/user?pageNum=${pageList.pageNum - 1}&pageSize=${pageList.pageSize}">Prev</a></li>
+                        </c:if>
+                        <c:forEach begin="1" end="${pageList.pages}" var="i">
+                        <li <c:if test="${i == pageList.pageNum}"> class="page-item active" </c:if> >
+                            <a class="page-link" href="/sys/user?pageNum=${i}&pageSize=${pageList.pageSize}">${i}</a>
                         </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">4</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a>
-                        </li>
+                        </c:forEach>
+                        <c:if test="${pageList.hasNextPage}">
+                            <li class="page-item"><a class="page-link" href="/sys/user?pageNum=${pageList.pageNum + 1}&pageSize=${pageList.pageSize}">Next</a></li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
