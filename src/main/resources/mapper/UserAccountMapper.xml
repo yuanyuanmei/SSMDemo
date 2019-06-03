@@ -4,12 +4,13 @@
 <mapper namespace="com.dm.example.dao.UserAccountDao">
 
     <resultMap id="BaseMap" type="UserAccountBean">
-        <association property="userBaseBean" column="user_id" javaType="UserBaseBean" fetchType="lazy"
+        <result column="user_account_id" property="id" />
+        <association property="userBaseBean" column="user_id" javaType="UserBaseBean"
                      select="com.dm.example.dao.UserBaseDao.selectByPrimaryKey"/>
     </resultMap>
 
     <sql id="BaseColumns">
-        id
+        id as user_account_id
         ,account
         ,type
         ,create_time
