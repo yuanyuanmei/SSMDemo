@@ -3,14 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dm.example.dao.SysPermissionDao">
 
+    <resultMap id="BaseMap" type="SysPermissionBean">
+        <result column="sys_perms_id" property="id" />
+    </resultMap>
+
     <sql id="BaseColumns">
-        id,name,type,parent_id,url,icon,permission,status,memo,sort,create_time,is_delete
+        account_sys_permission.id as sys_perms_id,
+        account_sys_permission.name,
+        account_sys_permission.type,
+        account_sys_permission.parent_id,
+        account_sys_permission.url,
+        account_sys_permission.icon,
+        account_sys_permission.permission,
+        account_sys_permission.status,
+        account_sys_permission.memo,
+        account_sys_permission.sort,
+        account_sys_permission.create_time,
+        account_sys_permission.is_delete
     </sql>
 
     <!--根据角色ID查询权限-->
-    <select id="getPermissionsByRoleId" resultType="SysPermissionBean" parameterType="java.lang.Integer">
+    <select id="getPermissionsByRoleId" resultMap="BaseMap" parameterType="java.lang.Integer">
         select
-        account_sys_permission.*
+        <include refid="BaseColumns" />
         from account_sys_permission
         left join account_sys_role_permission on account_sys_permission.id = account_sys_role_permission.permission_id
         <where>
@@ -20,7 +35,7 @@
     </select>
 
     <!--根据用户ID查询权限-->
-    <select id="getPermissionsByUserId" resultType="SysPermissionBean" parameterType="java.lang.Long">
+    <select id="getPermissionsByUserId" resultMap="BaseMap" parameterType="java.lang.Long">
         select a.*
         from account_sys_permission a
         left join account_sys_role_permission b on a.id = b.permission_id
@@ -29,7 +44,7 @@
         where d.user_id = #{userId} and type =1
     </select>
 
-    <select id="selectByPrimaryKey" resultType="SysPermissionBean" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" resultMap="BaseMap" parameterType="java.lang.Integer">
         select
         <include refid="BaseColumns"/>
         from account_sys_permission
@@ -38,7 +53,7 @@
         </where>
     </select>
 
-    <select id="list" resultType="SysPermissionBean" parameterType="SysPermissionBean">
+    <select id="list" resultMap="BaseMap" parameterType="SysPermissionBean">
         select
         <include refid="BaseColumns"/>
         from account_sys_permission
