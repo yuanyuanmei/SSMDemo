@@ -23,8 +23,7 @@ public class UserBaseServiceImpl implements UserBaseService {
     @Override
     public PageInfo<UserBaseBean> pageList(PageDto pageDto) {
         List<UserBaseBean> list = baseDao.list();
-        PageHelper.startPage(pageDto.getPageNo(),pageDto.getPageSize());
-        PageInfo<UserBaseBean> pageList = new PageInfo<>(list);
-        return pageList;
+        PageHelper.startPage(pageDto.getPageNo(),pageDto.getPageSize());        
+        return new PageInfo<>(list);
     }
 }
