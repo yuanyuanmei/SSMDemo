@@ -13,7 +13,10 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!-- 设置日志打印 -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
-
+        <!--开启懒加载-->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <!-- 当设置为‘true'的时候，懒加载的对象可能被任何懒属性全部加载。否则，每个属性都按需加载。 -->
+        <setting name="aggressiveLazyLoading" value="false" />
     </settings>
 
 
