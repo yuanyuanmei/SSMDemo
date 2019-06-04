@@ -53,4 +53,9 @@ public class SysPermissionBean extends BaseTree<SysPermissionBean> {
         */
         private Integer sort;
 
+        /**
+         * 类型名称
+         */
+        private String typeName;
+
 }

@@ -15,7 +15,7 @@
         <tr>
             <td>${item.id}</td>
             <td>${item.name}</td>
-            <td>${item.type}</td>
+            <td>${item.typeName}</td>
             <td>${item.url}</td>
             <td>${item.permission}</td>
         </tr>

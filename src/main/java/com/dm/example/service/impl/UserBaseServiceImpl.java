@@ -1,5 +1,6 @@
 package com.dm.example.service.impl;
 
+import com.dm.example.base.BaseServiceImpl;
 import com.dm.example.beans.UserBaseBean;
 import com.dm.example.dao.UserBaseDao;
 import com.dm.example.dto.PageDto;
@@ -15,15 +16,9 @@ import java.util.List;
  * 用户基础业务实现类
  */
 @Service
-public class UserBaseServiceImpl implements UserBaseService {
+public class UserBaseServiceImpl extends BaseServiceImpl<UserBaseBean> implements UserBaseService {
 
     @Autowired
     private UserBaseDao baseDao;
 
-    @Override
-    public PageInfo<UserBaseBean> pageList(PageDto pageDto) {
-        PageHelper.startPage(pageDto.getPageNum(),pageDto.getPageSize());
-        List<UserBaseBean> list = baseDao.list();
-        return new PageInfo<>(list);
-    }
 }

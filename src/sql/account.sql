@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 03/06/2019 20:21:16
+ Date: 04/06/2019 22:39:13
 */
 
 SET NAMES utf8mb4;
@@ -129,7 +129,7 @@ CREATE TABLE `account_sys_role`  (
   `is_delete` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '删除状态',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_sys_role
@@ -145,7 +145,7 @@ CREATE TABLE `account_sys_role_permission`  (
   `role_id` int(11) UNSIGNED NOT NULL COMMENT '角色ID',
   `permission_id` int(11) NOT NULL COMMENT '权限ID',
   PRIMARY KEY (`role_id`, `permission_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_sys_role_permission
@@ -226,7 +226,7 @@ CREATE TABLE `account_sys_role_user`  (
   `user_id` int(11) NOT NULL COMMENT '用户ID',
   `role_id` int(11) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_sys_role_user
@@ -254,7 +254,7 @@ CREATE TABLE `account_user_account`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `usr_id_index`(`user_id`) USING BTREE,
   INDEX `account_password_index`(`account`, `password`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户账号表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户账号表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_user_account
@@ -262,6 +262,16 @@ CREATE TABLE `account_user_account`  (
 INSERT INTO `account_user_account` VALUES (40, 40, '12342221225', 1, '5923c74b98d7421d7a056ee6583194a7', 'sk55', '12', '', '2019-05-29 23:37:35', '2019-05-29 23:37:35', '2019-05-29 23:37:35', 1);
 INSERT INTO `account_user_account` VALUES (41, 1, 'admin', 1, '626ab0aba5993b5f4f85d2b2069d9acf', 'Si1V', '123456', '', '2019-05-29 23:45:05', '2019-05-29 23:45:05', '2019-05-29 23:45:05', 1);
 INSERT INTO `account_user_account` VALUES (42, 42, '18573519914', 1, '53164bd7cb224620f6101068ba32d821', '91Y6', '123456', '', '2019-05-30 19:42:20', '2019-05-30 19:42:20', '2019-05-30 19:42:20', 1);
+INSERT INTO `account_user_account` VALUES (43, 43, 'abel1', 1, 'd9b8e1ca0bae3602f012bf1103ccc652', '444b', '123456', '', '2019-06-03 20:24:32', '2019-06-03 20:24:32', '2019-06-03 20:24:32', 1);
+INSERT INTO `account_user_account` VALUES (44, 44, 'dddddmmm', 1, '9788213d11df1fa067e4ed547ce984f2', '84fb', '1234563', '', '2019-06-03 20:24:44', '2019-06-03 20:24:44', '2019-06-03 20:24:44', 1);
+INSERT INTO `account_user_account` VALUES (45, 45, 'qqwe', 1, '71e9b23e8152975df0d65288598419d9', '7390', '6985', '', '2019-06-03 20:24:57', '2019-06-03 20:24:57', '2019-06-03 20:24:57', 1);
+INSERT INTO `account_user_account` VALUES (46, 46, 'asd123', 1, 'd419f0557db96a8d2c37cf479ab56791', 'i193', '123', '', '2019-06-03 20:25:08', '2019-06-03 20:25:08', '2019-06-03 20:25:08', 1);
+INSERT INTO `account_user_account` VALUES (47, 47, '2223333', 1, 'c110049f01f6648645a23d54a55719bb', '5WeO', '112321', '', '2019-06-03 20:25:16', '2019-06-03 20:25:16', '2019-06-03 20:25:16', 1);
+INSERT INTO `account_user_account` VALUES (48, 48, 'dpqw42', 1, 'e01ca2dcaa3a6746709fb898c57962e4', '7t82', '123', '', '2019-06-03 20:25:24', '2019-06-03 20:25:24', '2019-06-03 20:25:24', 1);
+INSERT INTO `account_user_account` VALUES (49, 49, 'p213p', 1, 'f7349f89bd997422e510d1e38b462969', 'qc6X', '123213', '', '2019-06-03 20:25:37', '2019-06-03 20:25:37', '2019-06-03 20:25:37', 1);
+INSERT INTO `account_user_account` VALUES (50, 50, 'sadasdas123', 1, '7f75f0827cfa9e550897141a4ed68b4f', 'NV72', '12321', '', '2019-06-03 20:25:49', '2019-06-03 20:25:49', '2019-06-03 20:25:49', 1);
+INSERT INTO `account_user_account` VALUES (51, 51, 'qq123', 1, '1bf7e6c7e4f0b3deac0c4f59df163692', '8Sm2', 'sad', '', '2019-06-03 20:25:55', '2019-06-03 20:25:55', '2019-06-03 20:25:55', 1);
+INSERT INTO `account_user_account` VALUES (52, 52, 'dddaaa', 1, '972c666113ed6038ed296c6c9eb828a5', '84MM', '1123', '', '2019-06-03 20:26:00', '2019-06-03 20:26:00', '2019-06-03 20:26:00', 1);
 
 -- ----------------------------
 -- Table structure for account_user_base
@@ -280,14 +290,24 @@ CREATE TABLE `account_user_base`  (
   `is_delete` tinyint(1) NOT NULL DEFAULT 1 COMMENT '删除状态',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `username_index`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基础表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户基础表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of account_user_base
 -- ----------------------------
 INSERT INTO `account_user_base` VALUES (1, 'rY1eOeX', '超级管理员', '', '', 1, '', '2019-05-29 23:37:35', '2019-05-29 23:37:35', 1);
-INSERT INTO `account_user_base` VALUES (41, '64G8D66', '', '', '', 1, '', '2019-05-29 23:45:05', '2019-05-29 23:45:05', 1);
-INSERT INTO `account_user_base` VALUES (42, 'CVW5UT3', '', '', '', 1, '', '2019-05-30 19:42:20', '2019-05-30 19:42:20', 1);
+INSERT INTO `account_user_base` VALUES (41, '64G8D66', '小兰', '', '', 1, '', '2019-05-29 23:45:05', '2019-05-29 23:45:05', 1);
+INSERT INTO `account_user_base` VALUES (42, 'CVW5UT3', '小溪', '', '', 1, '', '2019-05-30 19:42:20', '2019-05-30 19:42:20', 1);
+INSERT INTO `account_user_base` VALUES (43, '09g95BK', '三儿', '', '', 1, '', '2019-06-03 20:24:32', '2019-06-03 20:24:32', 1);
+INSERT INTO `account_user_base` VALUES (44, 'n592qAM', '二五', '', '', 1, '', '2019-06-03 20:24:44', '2019-06-03 20:24:44', 1);
+INSERT INTO `account_user_base` VALUES (45, '9aon4XZ', '一期', '', '', 1, '', '2019-06-03 20:24:57', '2019-06-03 20:24:57', 1);
+INSERT INTO `account_user_base` VALUES (46, 'tkU81nl', '过儿', '', '', 1, '', '2019-06-03 20:25:08', '2019-06-03 20:25:08', 1);
+INSERT INTO `account_user_base` VALUES (47, 'Bm24MS2', '狒狒', '', '', 1, '', '2019-06-03 20:25:16', '2019-06-03 20:25:16', 1);
+INSERT INTO `account_user_base` VALUES (48, '1qO2aFR', '兔子', '', '', 1, '', '2019-06-03 20:25:24', '2019-06-03 20:25:24', 1);
+INSERT INTO `account_user_base` VALUES (49, 'y4zA0FC', '冯总', '', '', 1, '', '2019-06-03 20:25:37', '2019-06-03 20:25:37', 1);
+INSERT INTO `account_user_base` VALUES (50, 'd25h478', '巴铁', '', '', 1, '', '2019-06-03 20:25:49', '2019-06-03 20:25:49', 1);
+INSERT INTO `account_user_base` VALUES (51, 'S8T4069', '伺服', '', '', 1, '', '2019-06-03 20:25:55', '2019-06-03 20:25:55', 1);
+INSERT INTO `account_user_base` VALUES (52, 'ym1993A', '壳子', '', '', 1, '', '2019-06-03 20:26:00', '2019-06-03 20:26:00', 1);
 
 -- ----------------------------
 -- Table structure for account_user_security

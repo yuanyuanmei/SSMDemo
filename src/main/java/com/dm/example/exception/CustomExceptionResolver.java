@@ -1,8 +1,7 @@
 package com.dm.example.exception;
 
-import com.dm.example.constants.ViewNameConsts;
+import com.dm.example.enums.EnumViewType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +39,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
             errorMsg = e.getMessage();
         }
         modelAndView.addObject("errorMsg",errorMsg);
-        modelAndView.setViewName(ViewNameConsts.ERROR_500);
+        modelAndView.setViewName(EnumViewType.ERROR_500.getResponse());
         //日志记录
         log.error("{}",errorMsg);
         return modelAndView;

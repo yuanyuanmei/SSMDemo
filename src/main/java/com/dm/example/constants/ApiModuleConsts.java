@@ -11,4 +11,6 @@ public class ApiModuleConsts {
     //权限模块
     public static final String SYS = "/sys";
 
+    //异常模块
+    public static final String ERROR = "/error";
 }

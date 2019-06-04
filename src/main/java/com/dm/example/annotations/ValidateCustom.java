@@ -30,6 +30,4 @@ import java.lang.annotation.Target;
 public @interface ValidateCustom {
     //校验对象
     Class value() default Object.class;
-    //跳转路径
-    String viewName() default "/";
 }
