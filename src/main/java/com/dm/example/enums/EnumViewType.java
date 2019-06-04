@@ -24,17 +24,17 @@ public enum EnumViewType {
     //注册
     REGISTER(ApiModuleConsts.USER+ ApiFuncConsts.REIGISTER,"view/register","注册"),
 
-    //用户列表
+    //后台管理页面
     ADMIN_INDEX(ApiModuleConsts.ADMIN+ ApiFuncConsts.INDEX,"admin/index","后台管理"),
 
     //用户列表
-    SYS_USER(ApiModuleConsts.SYS+ ApiFuncConsts.USER,"admin/index","用户管理"),
+    SYS_USER(ApiModuleConsts.SYS+ ApiFuncConsts.USER+ApiFuncConsts.LIST,"admin/index","用户管理"),
 
     //角色列表
-    SYS_ROLE(ApiModuleConsts.SYS+ ApiFuncConsts.ROLE,"admin/index","角色管理"),
+    SYS_ROLE(ApiModuleConsts.SYS+ ApiFuncConsts.ROLE+ApiFuncConsts.LIST,"admin/index","角色管理"),
 
     //菜单列表
-    SYS_MENU(ApiModuleConsts.SYS+ ApiFuncConsts.MENU,"admin/index","菜单管理"),
+    SYS_MENU(ApiModuleConsts.SYS+ ApiFuncConsts.MENU+ApiFuncConsts.LIST,"admin/index","菜单管理"),
 
     //登出页面
     LOGOUT(ApiModuleConsts.USER+ ApiFuncConsts.LOGOUT,"view/login","登出");

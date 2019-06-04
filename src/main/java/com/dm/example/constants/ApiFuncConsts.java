@@ -34,4 +34,17 @@ public class ApiFuncConsts {
 
     //600
     public static final String ERROR_600 = "/600";
+
+    //list
+    public static final String LIST = "/list";
+
+    //save
+    public static final String SAVE = "/save";
+
+    //update
+    public static final String UPDATE = "/update";
+
+    //delete
+    public static final String DELETE = "/delete";
+
 }
