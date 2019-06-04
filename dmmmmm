@@ -13,6 +13,15 @@
                     .filter(Object -> Object.getClass().equals(custom.value()))
                     .collect(Collectors.toList());
             Object obj = objects.size() > 0 ? objects.get(0) : null;
+
+            // 参数校验
+            String validateMsg =  ValidationUtils.validate(obj);
+            if(Objects.nonNull(validateMsg)){
+                // 获取request对象，传递参数
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                request.setAttribute("errorMsg",validateMsg);
+                return EnumViewType.RequestOf(request.getServletPath()).getResponse();
+            }            
             
 2.userBaseServiceImpl替换枚举值
 
