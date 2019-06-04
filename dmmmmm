@@ -1,1 +1,49 @@
-123
+1. aop下的验证方法修改
+            // 获得注解中需要校验参数类
+            //常规方法获取参数
+//            Object obj = null;
+//            for(int i = 0;i<joinPoint.getArgs().length;i++){
+//                if(custom.value().equals(joinPoint.getArgs()[i].getClass())){
+//                    obj = joinPoint.getArgs()[i];
+//                    break;
+//                }
+//            }
+            //jdk8新特性filter过滤属性+三元运算符
+            List<Object> objects = Arrays.stream(joinPoint.getArgs())
+                    .filter(Object -> Object.getClass().equals(custom.value()))
+                    .collect(Collectors.toList());
+            Object obj = objects.size() > 0 ? objects.get(0) : null;
+            
+2.userBaseServiceImpl替换枚举值
+
+        List<UserBaseBean> list = baseDao.list();
+        list.forEach(item -> {
+            item.setTypeName(EnumUserType.getValueByKey(item.getType()));
+        });
+        PageHelper.startPage(pageDto.getPageNo(),pageDto.getPageSize());
+        return new PageInfo<>(list);
+        
+3.枚举中添加根据key获取value方法
+
+    public static String keyOf(Integer key){
+        List<EnumUserType> collect = list.stream().filter(item -> item.key.equals(key)).collect(Collectors.toList());
+        String value = collect.size() > 0 ? collect.get(0).getValue() : "";
+        return value;
+    }
+    
+4.增加BaseServiceImpl
+
+@Service
+public abstract class BaseServiceImpl<T> implements BaseService<T> {
+
+    @Autowired
+    private BaseDao<T> baseDao;
+
+    @Override
+    public PageInfo<T> pageList(PageDto pageDto) {
+        List<T> list = baseDao.list();
+        PageHelper.startPage(pageDto.getPageNo(),pageDto.getPageSize());
+        return new PageInfo<>(list);
+    }
+
+}
