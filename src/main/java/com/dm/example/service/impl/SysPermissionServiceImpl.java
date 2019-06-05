@@ -30,10 +30,10 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionBean>
         return new PageInfo<>(list);
     }
     
-    public List<SysPermissionBean> breadCrumbs(List<SysPermissionBean> treeList,SysPermissionBean paramBean){
+    public List<SysPermissionBean> breadCrumbs(List<SysPermissionBean> permsBeanList,SysPermissionBean paramBean){
         if(paramBean!=null){
             templist.add(paramBean);
-            List<SysPermissionBean> collect = treeList.stream().filter(item -> item.getId().equals(paramBean.getParentId())).collect(Collectors.toList());
+            List<SysPermissionBean> collect = permsBeanList.stream().filter(item -> item.getId().equals(paramBean.getParentId())).collect(Collectors.toList());
             SysPermissionBean parentBean = collect.size() > 0 ? collect.get(0) : null;
             breadCrumbs(treeList,parentBean);
         }
