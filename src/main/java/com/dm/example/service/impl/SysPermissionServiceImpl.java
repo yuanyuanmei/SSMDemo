@@ -17,6 +17,9 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionBean>
 
     @Autowired
     private SysPermissionDao permsDao;
+    
+    private List<SysPermissionBean> templist = new ArrayList<>();
+    
     @Override
     public PageInfo<SysPermissionBean> pageList(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPageNum(),pageDto.getPageSize());
@@ -25,5 +28,16 @@ public class SysPermissionServiceImpl extends BaseServiceImpl<SysPermissionBean>
             item.setTypeName(EnumPermsType.keyOf(item.getType()));
         });
         return new PageInfo<>(list);
+    }
+    
+    public List<SysPermissionBean> breadCrumbs(List<SysPermissionBean> treeList,SysPermissionBean paramBean){
+        if(paramBean!=null){
+            templist.add(paramBean);
+            List<SysPermissionBean> collect = treeList.stream().filter(item -> item.getId().equals(paramBean.getParentId())).collect(Collectors.toList());
+            SysPermissionBean parentBean = collect.size() > 0 ? collect.get(0) : null;
+            breadCrumbs(treeList,parentBean);
+        }
+        Collections.reverse(templist);
+        return templist;
     }
 }
