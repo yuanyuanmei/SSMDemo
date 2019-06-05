@@ -11,4 +11,5 @@ import java.util.List;
  * 权限业务处理
  */
 public interface SysPermissionService extends BaseService<SysPermissionBean> {
+  List<SysPermissionBean> breadCrumbs(List<SysPermissionBean> permsBeanList,SysPermissionBean paramBean);
 }
