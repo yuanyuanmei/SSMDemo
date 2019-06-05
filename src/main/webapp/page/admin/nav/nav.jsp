@@ -11,7 +11,7 @@
                 </li>
                 <c:forEach items="${item.childList}" var="child">
                     <li class="nav-item nav-dropdown">
-                        <a class="nav-link" href="../${child.url}"><i class="icon-puzzle"></i> ${child.name}</a>
+                        <a class="nav-link" href="..${child.url}"><i class="icon-puzzle"></i> ${child.name}</a>
                     </li>
                 </c:forEach>
             </c:forEach>

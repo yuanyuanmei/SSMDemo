@@ -22,4 +22,9 @@ public interface SysPermissionDao extends BaseDao<SysPermissionBean> {
      * 根据用户ID查询权限集合
      */
     List<SysPermissionBean> getPermissionsByUserId(@Param("userId") Long userId);
+
+    /**
+     * 根据URL查询权限
+     */
+    SysPermissionBean getPermsBeanByUrl(@Param("url") String url);
 }

@@ -8,6 +8,7 @@
         <th>类型</th>
         <th>路径</th>
         <th>授权标识</th>
+        <th>操作</th>
     </tr>
     </thead>
     <tbody>
@@ -18,6 +19,10 @@
             <td>${item.typeName}</td>
             <td>${item.url}</td>
             <td>${item.permission}</td>
+            <td>
+                <button type="button" class="btn btn-success"onclick="location.href='/sys/menu?opt=save'">编辑</button>
+                <button type="button" class="btn btn-danger" onclick="location.href=''">删除</button>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

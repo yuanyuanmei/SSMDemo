@@ -17,7 +17,7 @@
             <td>${item.username}</td>
             <td>${item.nickname}</td>
             <td>
-                <button type="button" class="btn btn-success"onclick="location.href=''">编辑</button>
+                <button type="button" class="btn btn-success"onclick="location.href='/sys/user?opt=save'">编辑</button>
                 <button type="button" class="btn btn-danger" onclick="location.href=''">删除</button>
             </td>
         </tr>

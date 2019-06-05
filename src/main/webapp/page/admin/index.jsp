@@ -15,7 +15,7 @@
 
         <%@include file="nav/breadcrumb.jsp"%>
 
-        <c:if test="${sysType != null}">
+        <c:if test="${url != '/admin/index'}">
             <%@include file="table/index.jsp"%>
         </c:if>
 

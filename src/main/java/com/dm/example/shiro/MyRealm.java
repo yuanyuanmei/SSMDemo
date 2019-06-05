@@ -4,7 +4,7 @@ import com.dm.example.beans.SysPermissionBean;
 import com.dm.example.beans.SysRoleBean;
 import com.dm.example.beans.UserAccountBean;
 import com.dm.example.dao.UserAccountDao;
-import com.dm.example.util.UserUtils;
+import com.dm.example.util.SessionUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -41,7 +41,7 @@ public class MyRealm extends AuthorizingRealm {
         Set<String> roleNames = roles.stream().map(SysRoleBean::getName).collect(Collectors.toSet());
         authorizationInfo.setRoles(roleNames);
         //获取权限名称集合
-        List<SysPermissionBean> permissionList = UserUtils.getPermissionBeans(roles);
+        List<SysPermissionBean> permissionList = SessionUtils.getPermissionBeans(roles);
         Set<String> permissions = permissionList.stream().filter(p -> !Objects.isNull(p.getPermission()))
                 .map(SysPermissionBean::getPermission).collect(Collectors.toSet());
         authorizationInfo.setStringPermissions(permissions);
@@ -65,8 +65,8 @@ public class MyRealm extends AuthorizingRealm {
         if(Objects.nonNull(bean)){
             ByteSource credentialsSalt = ByteSource.Util.bytes(bean.getSalt());
             AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(bean.getAccount(),bean.getPassword(),credentialsSalt,getName());
-            UserUtils.setUserSession(bean.getUserBaseBean());
-            UserUtils.setNavSession(bean.getUserBaseBean().getRoleBeans());
+            SessionUtils.setUserSession(bean.getUserBaseBean());
+            SessionUtils.setNavSession(bean.getUserBaseBean().getRoleBeans());
             return authenticationInfo;
         }
         return null;

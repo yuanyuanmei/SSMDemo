@@ -10,7 +10,7 @@ import org.apache.shiro.subject.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserUtils {
+public class SessionUtils {
 
     /**
      * 获得shiro自带session
@@ -37,6 +37,7 @@ public class UserUtils {
     public static void setNavSession(List<SysRoleBean> roleBeans){
         getSession().setAttribute("nav",TreeUtils.convertToTree(getPermissionBeans(roleBeans),0));
     }
+
     /**
      * 通过session获得当前用户
      * @return
@@ -53,9 +54,9 @@ public class UserUtils {
         List<SysPermissionBean> permissionBeans = new ArrayList<>();
         for(int i =0;roleBeans!=null && i<roleBeans.size();i++){
             SysRoleBean roleBean = roleBeans.get(i);
-                permissionBeans.addAll(roleBean.getPermissionBeans());
-            }
-            return permissionBeans;
+            permissionBeans.addAll(roleBean.getPermissionBeans());
+        }
+        return permissionBeans;
     }
 
 

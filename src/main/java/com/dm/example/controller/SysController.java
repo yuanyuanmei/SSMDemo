@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 权限列表管理
  */
@@ -31,24 +33,35 @@ public class SysController {
     private SysPermissionService permsService;
 
     //用户列表
-    @GetMapping(ApiFuncConsts.USER+ApiFuncConsts.LIST)
-    public String getUserList(PageDto pageDto,Model model){
-        model.addAttribute("sysType","user");
-        model.addAttribute("pageList",baseService.pageList(pageDto));
+    @GetMapping(ApiFuncConsts.USER)
+    public String getUserList(PageDto pageDto, HttpServletRequest request){
+        if(request.getAttribute("opt").equals(ApiFuncConsts.LIST)){
+            request.setAttribute("pageList",baseService.pageList(pageDto));
+        }else{
+
+        }
         return EnumViewType.SYS_USER.getResponse();
+
     }
     //角色列表
-    @GetMapping(ApiFuncConsts.ROLE+ApiFuncConsts.LIST)
-    public String getRoleList(PageDto pageDto,Model model){
-        model.addAttribute("sysType","role");
-        model.addAttribute("pageList",roleService.pageList(pageDto));
+    @GetMapping(ApiFuncConsts.ROLE)
+    public String getRoleList(PageDto pageDto,HttpServletRequest request){
+        if(request.getAttribute("opt").equals(ApiFuncConsts.LIST)){
+            request.setAttribute("pageList",roleService.pageList(pageDto));
+        }else{
+
+        }
         return EnumViewType.SYS_ROLE.getResponse();
     }
     //权限列表
-    @GetMapping(ApiFuncConsts.MENU+ApiFuncConsts.LIST)
-    public String getMenuList(PageDto pageDto,Model model){
-        model.addAttribute("sysType","menu");
-        model.addAttribute("pageList",permsService.pageList(pageDto));
+    @GetMapping(ApiFuncConsts.MENU)
+    public String getMenuList(PageDto pageDto,HttpServletRequest request){
+        if(request.getAttribute("opt").equals(ApiFuncConsts.LIST)){
+            request.setAttribute("pageList",permsService.pageList(pageDto));
+        }else{
+
+        }
         return EnumViewType.SYS_MENU.getResponse();
     }
+
 }

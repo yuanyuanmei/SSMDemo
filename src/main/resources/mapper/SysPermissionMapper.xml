@@ -53,6 +53,15 @@
         </where>
     </select>
 
+    <select id="getPermsBeanByUrl" resultMap="BaseMap" parameterType="java.lang.String">
+        select
+        <include refid="BaseColumns"/>
+        from account_sys_permission
+        <where>
+            url = #{url}
+        </where>
+    </select>
+
     <select id="list" resultMap="BaseMap" parameterType="SysPermissionBean">
         select
         <include refid="BaseColumns"/>

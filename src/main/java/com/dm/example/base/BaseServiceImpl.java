@@ -15,8 +15,8 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public PageInfo<T> pageList(PageDto pageDto) {
-        List<T> list = baseDao.list();
         PageHelper.startPage(pageDto.getPageNum(),pageDto.getPageSize());
+        List<T> list = baseDao.list();
         return new PageInfo<>(list);
     }
 }
