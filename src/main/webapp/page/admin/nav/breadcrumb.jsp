@@ -1,5 +1,9 @@
 <!-- Breadcrumb -->
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
+
 <ol class="breadcrumb">
+    <c:if test="${url == '/admin/index'}"><li class="breadcrumb-item"><a href="#">首页</a></li></c:if>
     <c:forEach items="${breadCrumbs}" var="item" varStatus="i">
         <c:choose>
             <c:when test="${i.last}">

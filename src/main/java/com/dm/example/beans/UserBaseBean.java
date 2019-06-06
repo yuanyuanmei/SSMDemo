@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +43,13 @@ public class UserBaseBean extends BaseEntity{
         /**
         * 用户名
         */
+        @NotBlank(message="用户名不能为空")
         private String username;
 
         /**
          * 昵称
          */
+        @NotBlank(message = "昵称不能为空")
         private String nickname;
 
         /**

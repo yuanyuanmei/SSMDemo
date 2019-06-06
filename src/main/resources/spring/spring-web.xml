@@ -57,4 +57,7 @@
     <!--扫描aop包-->
     <context:component-scan base-package="com.dm.example.aop"/>
 
+    <!--实例化spring上下文对象-->
+    <bean id="springContextUtil" class="com.dm.example.util.SpringContextUtil" />
+
 </beans>

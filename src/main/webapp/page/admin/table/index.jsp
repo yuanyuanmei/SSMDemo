@@ -5,11 +5,12 @@
     <div class="col-lg-1"></div>
     <div class="col-lg-10">
         <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> Combined All Table
-            </div>
             <c:if test="${opt == 'list'}">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> 列表
+                </div>
                 <div class="card-block">
+                    <button type="button" class="btn btn-success"onclick="location.href='/sys/user?opt=save'">新增</button>
                     <c:if test="${url == '/sys/user'}"><%@include file="list/table-user.jsp"%></c:if>
                     <c:if test="${url == '/sys/role'}"><%@include file="list/table-role.jsp"%></c:if>
                     <c:if test="${url == '/sys/menu'}"><%@include file="list/table-menu.jsp"%></c:if>
@@ -30,7 +31,10 @@
                     </nav>
                 </div>
             </c:if>
-            <c:if test="${opt == 'save'}">
+            <c:if test="${ opt == 'save' || opt == 'update' }">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> 表单
+                </div>
                 <c:if test="${url == '/sys/user'}"><%@include file="form/form-user.jsp"%></c:if>
                 <c:if test="${url == '/sys/role'}"><%@include file="form/form-role.jsp"%></c:if>
                 <c:if test="${url == '/sys/menu'}"><%@include file="form/form-menu.jsp"%></c:if>

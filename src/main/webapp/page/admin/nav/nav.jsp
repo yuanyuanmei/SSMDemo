@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
 
 <div class="sidebar">
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+                <a class="nav-link" href="/admin/index"><i class="icon-speedometer"></i> 首页</a>
             </li>
             <c:forEach items="${sessionScope.nav}" var="item">
                 <li class="nav-title">

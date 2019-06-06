@@ -58,4 +58,8 @@ public class SysPermissionBean extends BaseTree<SysPermissionBean> {
          */
         private String typeName;
 
+        public SysPermissionBean(String name, String url) {
+                this.name = name;
+                this.url = url;
+        }
 }

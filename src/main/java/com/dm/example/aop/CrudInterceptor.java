@@ -1,11 +1,10 @@
 package com.dm.example.aop;
 
 import com.dm.example.annotations.CrudCustom;
+import com.dm.example.base.BaseEntity;
 import com.dm.example.base.BaseService;
 import com.dm.example.beans.SysPermissionBean;
 import com.dm.example.beans.UserBaseBean;
-import com.dm.example.constants.ApiFuncConsts;
-import com.dm.example.constants.ApiModuleConsts;
 import com.dm.example.dto.PageDto;
 import com.dm.example.enums.EnumViewType;
 import com.dm.example.service.SysPermissionService;
@@ -62,10 +61,6 @@ public class CrudInterceptor {
             //设置面包屑
             breadCrumbs = permsService.breadCrumbs(breadCrumbs, SessionUtils.getPermissionBeans(user.getRoleBeans()), permsBean);
         }
-        //如果是首页则添加首页面包屑
-        if (request.getServletPath().equals(ApiModuleConsts.ADMIN + ApiFuncConsts.INDEX)) {
-            breadCrumbs.add(new SysPermissionBean("首页", ApiModuleConsts.ADMIN + ApiFuncConsts.INDEX));
-        }
 
         //2.CRUD操作
         // 通过目标方法获取自定义注解
@@ -73,19 +68,36 @@ public class CrudInterceptor {
 
         //通过注解参数获得目标对象
         BaseService baseService = (BaseService) SpringContextUtil.getApplicationContext().getBean(crudCustom.value());
+        //获得请求类型
+        String methodType = request.getMethod();
+
         //设置操作类型
         String opt = request.getParameter("opt") == null ? "list" : request.getParameter("opt");
-        switch (opt){
-            case "list":
-                Integer pageNum =  Objects.isNull(request.getParameter("pageNum")) ? 1 : Integer.valueOf(request.getParameter("pageNum"));
-                Integer pageSize =  Objects.isNull(request.getParameter("pageSize")) ? 10 : Integer.valueOf(request.getParameter("pageSize"));
-                request.setAttribute("pageList",baseService.pageList(new PageDto(pageNum,pageSize)));
-                break;
-            case "update":
-                Long id = Long.valueOf(request.getParameter("id"));
-                request.setAttribute("item",baseService.selectByPrimaryKey(id));
-                break;
+        if(methodType.equals("GET")){
+
+            switch (opt){
+                case "list":
+                    Integer pageNum =  Objects.isNull(request.getParameter("pageNum")) ? 1 : Integer.valueOf(request.getParameter("pageNum"));
+                    Integer pageSize =  Objects.isNull(request.getParameter("pageSize")) ? 10 : Integer.valueOf(request.getParameter("pageSize"));
+                    request.setAttribute("pageList",baseService.pageList(new PageDto(pageNum,pageSize)));
+                    break;
+                case "update":
+                    Long id = Long.valueOf(request.getParameter("id"));
+                    request.setAttribute("item",baseService.selectByPrimaryKey(id));
+                    break;
+            }
+
+        }else{
+            BaseEntity bean = (BaseEntity) joinPoint.getArgs()[0];
+            UserBaseBean baseBean = (UserBaseBean) joinPoint.getArgs()[0];
+            System.out.println(baseBean.toString());
+            if(Objects.isNull(bean.getId())){
+                baseService.insert(joinPoint.getArgs()[0]);
+            }else{
+                baseService.update(joinPoint.getArgs()[0]);
+            }
         }
+
         request.setAttribute("opt", opt);
         request.setAttribute("breadCrumbs", breadCrumbs);
         request.setAttribute("url", request.getServletPath());

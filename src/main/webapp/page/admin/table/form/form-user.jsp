@@ -6,31 +6,38 @@
         Input
         <strong>Sizes</strong>
     </div>
-    <div class="card-block">
-        <form action="" method="post" class="form-horizontal ">
-            <div class="form-group row">
-                <label class="col-sm-3 form-control-label" for="input-small">Small Input</label>
-                <div class="col-sm-6">
-                    <input type="text" id="input-small" name="input-small" class="form-control form-control-sm" placeholder=".form-control-sm">
+    <form action="/sys/user" method="post" class="form-horizontal ">
+        <div class="card-block">
+                <div class="form-group row">
+                    <input type="hidden" name="id" value="${item.id}"/>
+                    <label class="col-sm-3 form-control-label" for="username">用户名</label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly id="username" name="username" class="form-control" placeholder="username" value="${item.username}">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 form-control-label" for="input-normal">Normal Input</label>
-                <div class="col-sm-6">
-                    <input type="text" id="input-normal" name="input-normal" class="form-control" placeholder="Normal">
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label" for="input-normal">昵称</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="nickname" id="input-normal" class="form-control" placeholder="nickname" value="${item.nickname}">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 form-control-label" for="input-large">Large Input</label>
-                <div class="col-sm-6">
-                    <input type="text" id="input-large" name="input-large" class="form-control form-control-lg" placeholder=".form-control-lg">
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label" for="ccmonth">类型</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" id="ccmonth" name="type">
+                            <c:forEach items="${typeEnum}" var="opt">
+                                <option value="${opt.key}" <c:if test="${item.type == opt.key}">selected</c:if> >${opt.value}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    <div class="card-footer">
-        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-    </div>
+            <div>${errorMsg}</div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+        </div>
+    </form>
 </div>
 </div>

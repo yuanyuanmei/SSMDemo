@@ -36,7 +36,8 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
             //获取错误信息
             errorMsg = customException.getMessage();
         }else{
-            errorMsg = e.getMessage();
+            //errorMsg = e.getMessage();
+            e.printStackTrace();
         }
         modelAndView.addObject("errorMsg",errorMsg);
         modelAndView.setViewName(EnumViewType.ERROR_500.getResponse());
