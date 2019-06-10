@@ -4,8 +4,6 @@ import com.dm.example.beans.UserAccountBean;
 import com.dm.example.beans.UserBaseBean;
 import com.dm.example.dao.UserAccountDao;
 import com.dm.example.dao.UserBaseDao;
-import com.dm.example.dto.ResultDto;
-import com.dm.example.enums.EnumAccountType;
 import com.dm.example.service.UserAccountService;
 import com.dm.example.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +23,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Transactional
     @Override
-    public ResultDto save(UserAccountBean paramBean){
+    public String save(UserAccountBean paramBean){
         int result = 0;
         //根据帐号查找是否存在
         if(Objects.nonNull(accountDao.findByAccount(paramBean.getAccount()))){
-            return ResultDto.fail("账号已存在");
+            return StringUtils.formatFailJson("账号已存在");
         }
         if(Objects.isNull(paramBean.getId())){
             //生成7位数随机用户名
@@ -50,9 +48,9 @@ public class UserAccountServiceImpl implements UserAccountService {
             result = accountDao.update(paramBean);
         }
         if(result > 0){
-            return ResultDto.success("更新成功",paramBean);
+            return StringUtils.formatSuccessJson("更新成功",paramBean);
         }
-        return ResultDto.fail("更新失败");
+        return StringUtils.formatFailJson("更新失败");
     }
 
 
