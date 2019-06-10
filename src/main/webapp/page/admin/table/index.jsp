@@ -10,7 +10,7 @@
                     <i class="fa fa-align-justify"></i> 列表
                 </div>
                 <div class="card-block">
-                    <button type="button" class="btn btn-success"onclick="location.href='/sys/user?opt=save'">新增</button>
+                    <button type="button" class="btn btn-success"onclick="location.href='${url}?opt=save'">新增</button>
                     <c:if test="${url == '/sys/user'}"><%@include file="list/table-user.jsp"%></c:if>
                     <c:if test="${url == '/sys/role'}"><%@include file="list/table-role.jsp"%></c:if>
                     <c:if test="${url == '/sys/menu'}"><%@include file="list/table-menu.jsp"%></c:if>
@@ -25,7 +25,7 @@
                             </li>
                             </c:forEach>
                             <c:if test="${pageList.hasNextPage}">
-                                <li class="page-item"><a class="page-link" href="/sys/user?pageNum=${pageList.pageNum + 1}&pageSize=${pageList.pageSize}">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="${url}?pageNum=${pageList.pageNum + 1}&pageSize=${pageList.pageSize}">Next</a></li>
                             </c:if>
                         </ul>
                     </nav>
@@ -38,6 +38,21 @@
                 <c:if test="${url == '/sys/user'}"><%@include file="form/form-user.jsp"%></c:if>
                 <c:if test="${url == '/sys/role'}"><%@include file="form/form-role.jsp"%></c:if>
                 <c:if test="${url == '/sys/menu'}"><%@include file="form/form-menu.jsp"%></c:if>
+
+                <script>
+                    function subForm(){
+                        var url = "${url}";
+                        var data = $("*[name=form1]").serialize();
+                        $.post(url,data,function(res){
+                            if(res.code == 204){
+                                $(".msg").text(res.msg);
+                            }else if(res.code == 200){
+                                alert(res.msg);
+                            }
+                        },"json");
+                    }
+
+                </script>
             </c:if>
         </div>
     </div>
