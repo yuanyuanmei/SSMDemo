@@ -74,7 +74,7 @@ public class SysController {
     @ResponseBody
     @ValidateCustom(SysRoleBean.class)
     @CrudCustom(SysRoleService.class)
-    @PostMapping(ApiFuncConsts.USER)
+    @PostMapping(ApiFuncConsts.ROLE)
     public String saveRole(SysRoleBean paramBean){
         return StringUtils.formatSuccessJson("更新成功");
     }
@@ -83,7 +83,7 @@ public class SysController {
     @ResponseBody
     @ValidateCustom(SysPermissionBean.class)
     @CrudCustom(SysPermissionService.class)
-    @PostMapping(ApiFuncConsts.USER)
+    @PostMapping(ApiFuncConsts.MENU)
     public String saveMenu(SysPermissionBean paramBean){
         return StringUtils.formatSuccessJson("更新成功");
     }
