@@ -16,7 +16,7 @@
             <td>${item.name}</td>
             <td>${item.desc}</td>
             <td>
-                <button type="button" class="btn btn-success"onclick="location.href='/sys/role?opt=save'">编辑</button>
+                <button type="button" class="btn btn-success"onclick="location.href='${url}?opt=update&id=${item.id}'">编辑</button>
                 <button type="button" class="btn btn-danger" onclick="location.href=''">删除</button>
             </td>
         </tr>
