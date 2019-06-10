@@ -1,7 +1,6 @@
 package com.dm.example.aop;
-
 import com.dm.example.annotations.ValidateCustom;
-import com.dm.example.enums.EnumViewType;
+import com.dm.example.util.StringUtils;
 import com.dm.example.util.ValidationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,20 +8,15 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
+import org.springframework.web.bind.annotation.ResponseBody;
 import java.lang.reflect.Method;
-import java.net.URLEncoder;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Aspect
 @Component
+@ResponseBody
 /**
  * 拦截自定义验证注解
  */
@@ -56,12 +50,9 @@ public class ValidateInterceptor {
             // 参数校验
             String validateMsg =  ValidationUtils.validate(obj);
             if(Objects.nonNull(validateMsg)){
-                // 获取request对象，传递参数
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                request.setAttribute("errorMsg",validateMsg);
-                return EnumViewType.RequestOf(request.getServletPath()).getResponse();
+                return StringUtils.formatFailJson(validateMsg);
             }
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             log.error("{}",e.getMessage());
         }
