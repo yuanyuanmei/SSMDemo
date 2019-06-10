@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class SysRoleBean extends BaseEntity{
         /**
         * 角色名称
         */
+        @NotBlank(message = "角色名称不能为空")
         private String name;
         /**
         * 描述
