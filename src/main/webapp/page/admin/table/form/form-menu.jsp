@@ -7,29 +7,48 @@
         <strong>Sizes</strong>
     </div>
     <div class="card-block">
-        <form action="" method="post" class="form-horizontal ">
+        <form action="" method="post" class="form-horizontal " name="form1">
             <div class="form-group row">
-                <label class="col-sm-3 form-control-label" for="input-small">Small Input</label>
+                <label class="col-sm-3 form-control-label" for="input-small">名称</label>
                 <div class="col-sm-6">
-                    <input type="text" id="input-small" name="input-small" class="form-control form-control-sm" placeholder=".form-control-sm">
+                    <input type="text" id="input-small" name="name" class="form-control" placeholder="name" value="${item.name}">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 form-control-label" for="input-normal">Normal Input</label>
+                <label class="col-sm-3 form-control-label" for="input-normal">类型</label>
                 <div class="col-sm-6">
-                    <input type="text" id="input-normal" name="input-normal" class="form-control" placeholder="Normal">
+                    <input type="text" id="input-normal" name="input-normal" class="form-control" placeholder="type">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 form-control-label" for="input-large">Large Input</label>
+                <label class="col-sm-3 form-control-label" for="parent_id">父级标签</label>
                 <div class="col-sm-6">
-                    <input type="text" id="input-large" name="input-large" class="form-control form-control-lg" placeholder=".form-control-lg">
+                    <input type="text" id="parent_id" name="parent_id" class="form-control" placeholder="parent_id">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label" for="url">路径</label>
+                <div class="col-sm-6">
+                    <input type="text" id="url" name="url" class="form-control" placeholder="url">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label" for="permission">权限</label>
+                <div class="col-sm-6">
+                    <input type="text" id="permission" name="permission" class="form-control" placeholder="permission">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 form-control-label" for="memo">备注</label>
+                <div class="col-sm-6">
+                    <input type="text" id="memo" name="memo" class="form-control" placeholder="memo">
                 </div>
             </div>
         </form>
+        <div class="msg"></div>
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+        <button type="button" class="btn btn-sm btn-primary" onclick="subForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
     </div>
 </div>
