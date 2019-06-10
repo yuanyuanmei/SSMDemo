@@ -20,7 +20,7 @@
             <td>${item.url}</td>
             <td>${item.permission}</td>
             <td>
-                <button type="button" class="btn btn-success"onclick="location.href='/sys/menu?opt=save'">编辑</button>
+                <button type="button" class="btn btn-success"onclick="location.href='${url}?opt=update&id=${item.id}'">编辑</button>
                 <button type="button" class="btn btn-danger" onclick="location.href=''">删除</button>
             </td>
         </tr>
