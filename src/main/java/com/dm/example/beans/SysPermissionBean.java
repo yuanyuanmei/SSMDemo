@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class SysPermissionBean extends BaseTree<SysPermissionBean> {
         /**
         * 名称
         */
+        @NotBlank(message = "权限名称不能为空")
         private String name;
         /**
         * 类型 1菜单 2功能
