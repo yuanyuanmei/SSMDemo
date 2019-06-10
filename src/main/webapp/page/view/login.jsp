@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="card-group mb-0">
                 <div class="card p-2">
-                    <form action="/user/login" method="post">
+                    <form action="/user/login" method="post" name="form1">
                         <div class="card-block">
                             <h1>登录</h1>
                             <p class="text-muted">登录你的账号</p>
@@ -23,10 +23,10 @@
                                 <input type="password" class="form-control" placeholder="Password" name="password">
                                 <input type="hidden" value="1" name="type"/>
                             </div>
-                            <div>${errorMsg}</div>
+                            <div class="msg"></div>
                             <div class="row">
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-primary px-2">Login</button>
+                                    <button type="button" class="btn btn-primary px-2" onclick="login()">Login</button>
                                 </div>
                                 <div class="col-6 text-right">
                                     <button type="button" class="btn btn-link px-0">忘记密码?</button>
@@ -49,6 +49,23 @@
     </div>
 </div>
 
+<script>
+    function login(){
+        var url = "/user/login";
+        var data = $("*[name=form1]").serialize();
+        $.post(url,data,function(res){
+            if(res.code == 204){
+                $(".msg").text(res.msg);
+            }else if(res.code == 200){
+                alert(res.msg);
+                window.setTimeout(function(){
+                    location.href = "/admin/index";
+                },"2000");
+            }
+        },"json");
+    }
+
+</script>
 
 <%@include file="../common/footer.jsp"%>
 
