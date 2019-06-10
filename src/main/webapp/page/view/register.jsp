@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card mx-2">
-                <form action="/user/register" method="post">
+                <form action="/user/register" method="post" name="form1">
                     <div class="card-block p-2">
                         <h1>Register</h1>
                         <p class="text-muted">Create your account</p>
@@ -34,8 +34,8 @@
                             <input type="password" class="form-control" placeholder="Repeat password">
                         </div>
                         <input type="hidden" value="1" name="type"/>
-                        <button type="submit" class="btn btn-block btn-success">Create Account</button>
-                        <div>${errorMsg}</div>
+                        <button type="button" class="btn btn-block btn-success" onclick="register()">Create Account</button>
+                        <div class="msg"></div>
                     </div>
                 </form>
                 <div class="card-footer p-2">
@@ -56,5 +56,21 @@
         </div>
     </div>
 </div>
+<script>
+    function register(){
+        var url = "/user/register";
+        var data = $("*[name=form1]").serialize();
+        $.post(url,data,function(res){
+            if(res.code == 204){
+                $(".msg").text(res.msg);
+            }else if(res.code == 200){
+                alert(res.msg);
+                window.setTimeout(function(){
+                    location.href = "/user/login";
+                },"2000");
+            }
+        },"json");
+    }
 
+</script>
 <%@include file="../common/footer.jsp"%>
