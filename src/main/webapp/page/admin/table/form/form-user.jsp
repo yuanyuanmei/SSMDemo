@@ -6,7 +6,7 @@
         Input
         <strong>Sizes</strong>
     </div>
-    <form action="/sys/user" method="post" class="form-horizontal ">
+    <form action="" method="post" class="form-horizontal " name="form1">
         <div class="card-block">
                 <div class="form-group row">
                     <input type="hidden" name="id" value="${item.id}"/>
@@ -31,11 +31,11 @@
                         </select>
                     </div>
                 </div>
-            <div>${errorMsg}</div>
+            <div class="msg"></div>
         </div>
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="button" class="btn btn-sm btn-primary" onclick="subForm()"><i class="fa fa-dot-circle-o"></i> Submit</button>
             <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
         </div>
     </form>
